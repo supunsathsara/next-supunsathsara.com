@@ -36,7 +36,7 @@ const projectsData = [
     id: 4,
     title: "Exercise Tracker MicroService",
     description: "Exercise Tracker is a MicroService that offers a platform for users to track their exercises. Built for FreeCodeCamp backend project",
-    image: "/images/projects/Exercise-tracker-showcase.webp",
+    image: "/images/projects/exercise-tracker-showcase.webp",
     tag: ["All", "Web"],
     gitUrl: "https://github.com/supunsathsara/FCC-Exercise-Tracker",
     previewUrl: "https://fcc-exercise-tracker.ssupunsathsara.repl.co/",
