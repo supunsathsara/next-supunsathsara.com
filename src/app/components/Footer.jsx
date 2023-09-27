@@ -1,11 +1,46 @@
 import React from "react";
+import Logo from "../../../public/images/white Logo-typography.png";
+import Image from "next/image";
 
 const Footer = () => {
   return (
     <footer className="footer border z-10 border-t-[#33353F] border-l-transparent border-r-transparent text-white">
-      <div className="container p-12 flex justify-between">
-        <span>supunsathsara.com</span>
-        <p className="text-slate-600">All rights reserved.</p>
+      <div className="container p-12 flex justify-between my-auto mx-auto">
+        <Image
+          src={Logo}
+          alt="Supun Sathsara Logo"
+          width={300}
+          quality={100}
+          className="my-auto"
+        />
+        <div className="my-auto">
+        <p className="text-slate-600">All rights reserved &copy; 2023</p>
+        </div>
+        <div className="my-auto">
+          {/**Legal */}
+          <ul className="flex flex-col space-y-2">
+            <li>
+              <a
+                href="https://www.supunsathsara.com/privacy-policy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-600 hover:text-white"
+              >
+                Privacy Policy
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.supunsathsara.com/terms-and-conditions"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-600 hover:text-white"
+              >
+                Terms and Conditions
+              </a>
+            </li>
+          </ul>  
+        </div>
       </div>
     </footer>
   );

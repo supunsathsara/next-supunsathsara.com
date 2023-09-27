@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import NavLink from "./NavLink";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import MenuOverlay from "./MenuOverlay";
+import TypoLogo from "../../../public/images/Main-Logo.png"
+import Image from "next/image";
 
 const navLinks = [
   {
@@ -34,7 +36,7 @@ const Navbar = () => {
           href={"/"}
           className="text-2xl md:text-3xl text-white font-semibold"
         >
-          🧑‍💻 Supun Sathsara
+          <Image src={TypoLogo} alt="Supun Sathsara Logo" width={100} quality={100} className="mx-2 overflow-clip" />
         </Link>
         <div className="mobile-menu block md:hidden">
           {!navbarOpen ? (
