@@ -5,20 +5,20 @@ import Image from "next/image";
 const Footer = () => {
   return (
     <footer className="footer border z-10 border-t-[#33353F] border-l-transparent border-r-transparent text-white">
-      <div className="container p-12 flex justify-between my-auto mx-auto">
+      <div className="container p-12 flex flex-col gap-3 md:gap-0 md:flex-row justify-between my-auto mx-auto">
         <Image
           src={Logo}
           alt="Supun Sathsara Logo"
           width={300}
           quality={100}
-          className="my-auto"
+          className="my-auto mx-auto md:mx-0 w-1/2 sm:w-[300px]"
         />
-        <div className="my-auto">
+        <div className="my-auto mx-auto md:mx-0">
         <p className="text-slate-600">All rights reserved &copy; 2023</p>
         </div>
         <div className="my-auto">
           {/**Legal */}
-          <ul className="flex flex-col space-y-2">
+          <ul className="flex flex-col space-y-1 md:space-y-2">
             <li>
               <a
                 href="https://www.supunsathsara.com/privacy-policy"
