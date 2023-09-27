@@ -75,7 +75,7 @@ const EmailSection = () => {
           {" "}
           I love to code and I&apos;m always looking for new opportunities to learn and grow. I&apos;m currently working on a few projects and I&apos;m always open to new ideas and collaborations. If you have any questions or want to work with me, feel free to contact me.
         </p>
-        <p className="text-lg font-semibold my-5">
+        <p className="text-lg font-semibold my-5 text-white">
           <EnvelopeIcon className="inline-block mr-2 h-6 w-6 text-white" />
           <a href="mailto:contact@supunsathsara.com" className="hover:underline">
             contact@supunsathsara.com
