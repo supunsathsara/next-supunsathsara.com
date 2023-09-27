@@ -18,6 +18,10 @@ const navLinks = [
     title: "Contact",
     path: "#contact",
   },
+  {
+    title: "Blog",
+    path: "https://blog.supunsathsara.com",
+  },
 ];
 
 const Navbar = () => {

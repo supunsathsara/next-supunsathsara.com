@@ -21,6 +21,7 @@ const GallerySection = () => {
                         alt="A way forward to the dev stage | knowledge sharing session for the juniors"
                         title="A way forward to the dev stage | Knowledge sharing session for the juniors"
                         src={WayForward}
+                        placeholder="blur"
                         fill
                         sizes="(max-width: 768px) 213px, 33vw"
                         priority
@@ -32,6 +33,7 @@ const GallerySection = () => {
                         alt="Gold medal for the best Academic performance in all NIBM campuses"
                         title="Gold medal for the best Academic performance in all NIBM campuses"
                         src={GoldMedal}
+                        placeholder="blur"
                         fill
                         sizes="(max-width: 768px) 213px, 33vw"
                         priority
@@ -43,6 +45,7 @@ const GallerySection = () => {
                         alt="Me at 2023 NIBM Diploma Convocation"
                         title="Me at 2023 NIBM Diploma Convocation"
                         src={Convocation}
+                        placeholder="blur"
                         fill
                         sizes="(max-width: 768px) 213px, 33vw"
                         priority
@@ -54,6 +57,7 @@ const GallerySection = () => {
                         alt="Me standing on stage at the Intro to Git event organized by the NIBM Computer Society"
                         title="Me standing on stage at the Intro to Git event organized by the NIBM Computer Society"
                         src={IntroGitEvent}
+                        placeholder="blur"
                         fill
                         sizes="(max-width: 768px) 213px, 33vw"
                         priority
@@ -65,6 +69,7 @@ const GallerySection = () => {
                         alt="Me presenting the Notifibm project at diploma final project presentation"
                         title="Me presenting the Notifibm project at diploma final project presentation"
                         src={NotifibmDemo}
+                        placeholder="blur"
                         fill
                         sizes="(max-width: 768px) 213px, 33vw"
                         priority
@@ -76,6 +81,7 @@ const GallerySection = () => {
                         alt="Me playing rugby for the NIBM rugby team"
                         title="Me playing rugby for the NIBM rugby team"
                         src={Rugby}
+                        placeholder="blur"
                         fill
                         sizes="(min-width: 768px) 213px, 33vw"
                         priority
