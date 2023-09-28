@@ -45,6 +45,9 @@ const EmailSection = () => {
         // Success
         setEmailSubmitted(true);
         setEmailError(false);
+
+        // Reset the form
+        e.target.reset();
       } else {
         // Error
         setEmailError(true);
@@ -107,6 +110,7 @@ const EmailSection = () => {
                 type="text"
                 id="name"
                 name="name"
+                autoComplete="name"
                 required
                 className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
                 placeholder="John Doe"
@@ -176,7 +180,7 @@ const EmailSection = () => {
             </p>
           )}
           {emailError && (
-            <p className="text-red-400 text-sm md:text-base mt-2">
+            <p className="text-red-400 text-sm md:text-base mt-2 z-5 mx-auto font-bold">
               An error occurred. Please try again later.
             </p>
           )}
