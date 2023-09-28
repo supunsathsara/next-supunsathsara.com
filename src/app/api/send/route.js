@@ -48,13 +48,47 @@ export async function POST(req, res) {
     subject: `Thank you for contacting me`,
     text: "I received your message and I will get back to you as soon as possible.",
     html: `
-  <h3>Hi ${name},</h3>
-  <h3>Thank you for contacting me</h3>
-  <p>I received your message and I will get back to you as soon as possible.</p>
-  <p>Best Regards,</p>
-  <p>Supun Sathsara</p>
-  <br/>
-  <p style="font-size: 12px;">This is an automated message. Please do not reply to this email.</p>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Message Received</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+            }
+            .container {
+                background-color: #f5f5f5;
+                padding: 20px;
+                border-radius: 5px;
+            }
+            .message {
+                background-color: #fff;
+                padding: 15px;
+                border-radius: 5px;
+            }
+            .signature {
+                font-size: 12px;
+                color: #666;
+                margin-top: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h3>Hello ${name},</h3>
+            <h3>Thank you for getting in touch!</h3>
+            <div class="message">
+                <p>I wanted to let you know that I've received your message, and I appreciate your interest.</p>
+                <p>I will review your message and get back to you as soon as possible.</p>
+            </div>
+            <p>Best Regards,</p>
+            <p>Supun Sathsara</p>
+            <p class="signature">[Automated Message: Please do not reply to this email]</p>
+        </div>
+    </body>
+    </html>  
   `
   }
 
@@ -65,7 +99,7 @@ export async function POST(req, res) {
       sgMail.send(clientMsg),
     ]);
     // console.log(adminResponse);
-    if (adminResponse[0].statusCode == 202) {
+    if (adminResponse[0]?.statusCode == 202) {
       return NextResponse.json({ success: true });
     }
   } catch (error) {
