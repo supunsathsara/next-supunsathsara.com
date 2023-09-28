@@ -4,6 +4,7 @@ import { useState } from "react";
 import GithubIcon from "../../../public/github-icon.svg";
 import LinkedinIcon from "../../../public/linkedin-icon.svg";
 import XIcon from "../../../public/x-icon.svg";
+import InstaIcon from "../../../public/instagram-icon.svg";
 import Link from "next/link";
 import Image from "next/image";
 import { EnvelopeIcon } from "@heroicons/react/24/outline";
@@ -93,6 +94,9 @@ const EmailSection = () => {
           </Link>
           <Link href="https://twitter.com/ssupunsathsara" title="Supun Sathsara on Twitter" target="_blank" rel="noopener noreferrer">
             <Image className="p-2" src={XIcon} height={48} width={48} alt="X Icon" />
+          </Link>
+          <Link href="https://www.instagram.com/s_supun_sathsara" title="Supun Sathsara on Instagram" target="_blank" rel="noopener noreferrer">
+            <Image className="p-1" src={InstaIcon} height={48} alt="Instagram Icon" />
           </Link>
         </div>
       </div>
