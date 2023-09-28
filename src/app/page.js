@@ -10,8 +10,7 @@ import GallerySection from "./components/GallerySection";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col bg-[#121212] scroll-smooth">
-      <Navbar />
+    <>
       <div class="container mt-24 mx-auto px-12 py-4">
         <HeroSection />
         <AchievementsSection />
@@ -20,7 +19,6 @@ export default function Home() {
         <ProjectsSection />
         <EmailSection />
       </div>
-      <Footer />
-    </main>
+    </>
   );
 }
