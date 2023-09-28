@@ -72,6 +72,7 @@ const HeroSection = () => {
               alt="hero image"
               className="rounded-full absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
               loading="eager" // Load this critical image eagerly
+              priority // Load this image before others below the fold
               width={300}
               height={300}
             />
