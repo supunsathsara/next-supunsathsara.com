@@ -1,6 +1,7 @@
 import React from "react";
 import Logo from "../../../public/images/white Logo-typography.png";
 import Image from "next/image";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -14,30 +15,37 @@ const Footer = () => {
           className="my-auto mx-auto md:mx-0 w-1/2 sm:w-[300px]"
         />
         <div className="my-auto mx-auto md:mx-0">
-        <p className="text-slate-600">All rights reserved &copy; 2023</p>
+        <p className="text-slate-400">All rights reserved &copy; 2023</p>
         </div>
         <div className="my-auto">
           {/**Legal */}
           <ul className="flex flex-col space-y-1 md:space-y-2">
-            <li>
-              <a
-                href="https://www.supunsathsara.com/privacy-policy"
+          <li>
+              <Link
+                href="https://status.supunsathsara.com"
+                className="text-slate-400 hover:text-white"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-600 hover:text-white"
               >
-                Privacy Policy
-              </a>
+                <span className="animate-pulse opacity-30 text-sm blur-sm mr-1">🟢</span>
+                Status
+              </Link>
             </li>
             <li>
-              <a
-                href="https://www.supunsathsara.com/terms-and-conditions"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate-600 hover:text-white"
+              <Link
+                href="/privacy-policy"
+                className="text-slate-400 hover:text-white"
+              >
+                Privacy Policy
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/terms"
+                className="text-slate-400 hover:text-white"
               >
                 Terms and Conditions
-              </a>
+              </Link>
             </li>
           </ul>  
         </div>
