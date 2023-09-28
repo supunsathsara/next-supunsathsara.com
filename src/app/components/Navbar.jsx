@@ -42,6 +42,7 @@ const Navbar = () => {
           {!navbarOpen ? (
             <button
               onClick={() => setNavbarOpen(true)}
+              aria-label="Menu Toggle"
               className="flex items-center px-3 py-2 border rounded border-slate-200 text-slate-200 hover:text-white hover:border-white"
             >
               <Bars3Icon className="h-5 w-5" />
@@ -49,6 +50,7 @@ const Navbar = () => {
           ) : (
             <button
               onClick={() => setNavbarOpen(false)}
+              aria-label="Menu Toggle"
               className="flex items-center px-3 py-2 border rounded border-slate-200 text-slate-200 hover:text-white hover:border-white"
             >
               <XMarkIcon className="h-5 w-5" />
