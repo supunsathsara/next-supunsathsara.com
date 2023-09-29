@@ -41,11 +41,11 @@ export default function RootLayout({ children }) {
         />
         <meta
           property="og:description"
-          content="A Developer based in Sri Lanka, specializing in building exceptional websites, applications, and everything in between."
+          content="A Developer specializing in building exceptional websites, applications, and everything in between."
         />
         <meta
           property="og:image"
-          content="/social-card.png"
+          content="https://supunsathsara.com/social-card.png"
         />
 
         {/* <!-- Twitter Meta Tags --> */}
@@ -57,11 +57,11 @@ export default function RootLayout({ children }) {
         />
         <meta
           name="twitter:description"
-          content="A Developer based in Sri Lanka, specializing in building exceptional websites, applications, and everything in between."
+          content="A Developer based specializing in building exceptional websites, applications, and everything in between."
         />
         <meta
           name="twitter:image"
-          content="/social-card.png"
+          content="https://supunsathsara.com/social-card.png"
         />
       </head>
       <body className='overflow-x-hidden'>
