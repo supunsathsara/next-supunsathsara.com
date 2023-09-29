@@ -56,8 +56,8 @@ const projectsData = [
     description: "CineSeat is a movie ticket booking app that offers a platform for users to book movie tickets. Built with C# and .NET Framework",
     image: "/images/projects/cineseat-showcase.webp",
     tag: ["All", "Other"],
-    gitUrl: "/",
-    previewUrl: "/",
+    gitUrl: "#",
+    previewUrl: "https://www.youtube.com/playlist?list=PL6fW1YX4gH3o267QZC90sDP_Y8H-rzyDt",
   },
 ];
 
