@@ -1,0 +1,17 @@
+<!-- public/sitemap.xml -->
+<xml version="1.0" encoding="UTF-8">
+  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+      <loc>https://supunsathsara.com</loc>
+      <lastmod>2023-09-30</lastmod>
+    </url>
+    <url>
+      <loc>https://supunsathsara.com/terms</loc>
+      <lastmod>2023-09-30</lastmod>
+    </url>
+    <url>
+      <loc>https://supunsathsara.com/privacy-policy</loc>
+      <lastmod>2023-09-30</lastmod>
+    </url>
+  </urlset>
+</xml>
