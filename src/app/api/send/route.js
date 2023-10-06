@@ -1,8 +1,16 @@
 // import { EmailTemplate } from '../../../components/EmailTemplate';
 import { NextResponse } from "next/server";
 const sgMail = require('@sendgrid/mail');
+import { z } from "zod";
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+const schema = z.object({
+  name: z.string().min(3).max(50),
+  email: z.string().email(),
+  subject: z.string().min(3).max(50),
+  message: z.string().min(3).max(500),
+});
 
 export async function POST(req, res) {
 
@@ -11,6 +19,15 @@ export async function POST(req, res) {
   if (!name || !email || !subject || !message) {
     //send status 400
     return NextResponse.json({ success: false, message: "Invalid Request" }, { status: 400 });
+  }
+  const data = { name, email, subject, message };
+  try {
+    schema.parse(data);
+  }
+  catch (error) {
+    return NextResponse.json({
+      success: false, message: error.errors[0].message
+    }, { status: 400 });
   }
 
   const adminMsg = {
