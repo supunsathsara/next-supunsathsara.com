@@ -77,6 +77,18 @@ const certificates = [
         url: 'https://cs50.harvard.edu/web/2020/', 
         provider: 'Harvard University',
     },
+    {
+        id: 14,
+        name: 'API Fundamentals Student Expert',
+        url: 'https://api.badgr.io/public/assertions/MUcOR1Y6SRmsXO36H3PZmQ?identity__email=contact%40supunsathsara.com', 
+        provider: 'Postman',
+    },
+    {
+        id: 15,
+        name: 'Foundational C# with Microsoft',
+        url: 'https://www.freecodecamp.org/certification/supunsathsara/foundational-c-sharp-with-microsoft', 
+        provider: 'Free Code Camp',
+    },
 ];
 
 export default certificates;
