@@ -7,7 +7,7 @@ const HolopinBoard = () => {
                 <Image
                     src="https://holopin.me/supunsathsara"
                     alt="@supunsathsara's Holopin board"
-                    className="rounded-xl cursor-pointer transform-gpu duration-200 mx-auto my-15 mb-20 w-[80%]"
+                    className="rounded-xl cursor-pointer transform-gpu duration-200 mx-auto my-15 mb-12 md:mb-20 md:w-[80%]"
                     width={2428}
                     height={764}
                 />
