@@ -7,6 +7,7 @@ import EmailSection from "./components/EmailSection";
 import Footer from "./components/Footer";
 import AchievementsSection from "./components/AchievementsSection";
 import GallerySection from "./components/GallerySection";
+import HolopinBoard from "./components/HolopinBoard";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <HeroSection />
         <AchievementsSection />
         <AboutSection />
+        <HolopinBoard />
         <GallerySection />
         <ProjectsSection />
         <EmailSection />
