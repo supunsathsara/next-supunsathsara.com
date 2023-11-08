@@ -6,6 +6,9 @@ import './globals.css'
 export const metadata = {
   title: 'Savindu Supun Sathsara',
   description: 'A Developer based in Sri Lanka, specializing in building exceptional websites, applications, and everything in between.',
+}
+
+export const viewport = {
   themeColor: '#121212',
 }
 
