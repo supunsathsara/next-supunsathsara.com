@@ -12,7 +12,7 @@ import HolopinBoard from "./components/HolopinBoard";
 export default function Home() {
   return (
     <>
-      <div class="container mt-24 mx-auto px-12 py-4">
+      <div className="container mt-24 mx-auto px-12 py-4">
         <HeroSection />
         <AchievementsSection />
         <AboutSection />

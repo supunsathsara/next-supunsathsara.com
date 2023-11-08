@@ -1,13 +1,6 @@
 "use client";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-
-const AnimatedNumbers = dynamic(
-  () => {
-    return import("react-animated-numbers");
-  },
-  { ssr: false }
-);
 
 const achievementsList = [
   {
@@ -26,6 +19,45 @@ const achievementsList = [
   },
 ];
 
+
+function AnimatedNumber({ number, duration, threshold = 0 }) {
+  const numberRef = useRef(null);
+  const [currentNumber, setCurrentNumber] = useState(0);
+  const [isIntersecting, setIsIntersecting] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsIntersecting(entry.isIntersecting);
+    }, {
+      threshold, // Set the threshold to 0 to trigger animation when any part of the element enters the viewport
+    });
+
+    if (numberRef.current) {
+      observer.observe(numberRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [numberRef, threshold]);
+
+  useEffect(() => {
+    if (isIntersecting) {
+      const interval = setInterval(() => {
+        if (currentNumber < number) {
+          setCurrentNumber((prevNumber) => prevNumber + 1);
+        } else {
+          clearInterval(interval);
+        }
+      }, duration / number);
+
+      return () => clearInterval(interval);
+    }
+  }, [isIntersecting, number, duration, currentNumber]);
+
+  return (
+    <span ref={numberRef}>{currentNumber}</span>
+  );
+}
+
 const AchievementsSection = () => {
   return (
     <div className="py-8 px-4 xl:gap-16 sm:py-16 xl:px-16">
@@ -38,18 +70,9 @@ const AchievementsSection = () => {
             >
               <h2 className="text-white text-4xl font-bold flex flex-row">
                 {achievement.prefix}
-                <AnimatedNumbers
-                  includeComma
-                  animateToNumber={parseInt(achievement.value)}
-                  locale="en-US"
-                  className="text-white text-4xl font-bold"
-                  configs={(_, index) => {
-                    return {
-                      mass: 1,
-                      friction: 100,
-                      tensions: 140 * (index + 1),
-                    };
-                  }}
+                <AnimatedNumber
+                  number={parseInt(achievement.value)}
+                  duration={1000}
                 />
                 {achievement.postfix}
               </h2>
