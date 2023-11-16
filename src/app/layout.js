@@ -1,5 +1,6 @@
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
+import ToastProvider from './components/ToastProvider'
 import './globals.css'
 
 
@@ -68,11 +69,13 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className='overflow-x-hidden'>
+      <ToastProvider>
       <main className="flex min-h-screen flex-col bg-[#121212] scroll-smooth">
       <Navbar />
         {children}
         <Footer />
       </main>
+      </ToastProvider>
         </body>
     </html>
   )

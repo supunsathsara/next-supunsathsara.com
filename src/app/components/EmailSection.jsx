@@ -8,6 +8,7 @@ import InstaIcon from "../../../public/instagram-icon.svg";
 import Link from "next/link";
 import Image from "next/image";
 import { EnvelopeIcon } from "@heroicons/react/24/outline";
+import { toast } from 'react-hot-toast';
 
 const EmailSection = () => {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
@@ -22,7 +23,7 @@ const EmailSection = () => {
 
     // Get form data
     const data = {
-      name:e.target.name.value,
+      name: e.target.name.value,
       email: e.target.email.value,
       subject: e.target.subject.value,
       message: e.target.message.value,
@@ -30,36 +31,55 @@ const EmailSection = () => {
 
     // Define the endpoint
     const endpoint = "/api/send";
-    console.log(data)
+    // console.log(data)
+
     try {
-      // Send a POST request with form data
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      toast.dismiss();
+      toast.promise(
+        fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => {
+            if (response.status === 200) {
+              // Success
+              setEmailSubmitted(true);
+              setEmailError(false);
+              return response.json();
+            } else {
+              // Error
+              setEmailError(true);
+              setEmailSubmitted(false);
+              throw new Error('An error occurred. Please try again later.');
+            }
+          }),
+        {
+          loading: 'Sending...',
+          success: 'Email sent successfully!',
+          error: 'An error occurred. Please try again later.',
         },
-        body: JSON.stringify(data),
-      });
-
-      // Check the response status
-      if (response.status === 200) {
-        // Success
-        setEmailSubmitted(true);
-        setEmailError(false);
-
-        // Reset the form
-        e.target.reset();
-      } else {
-        // Error
-        setEmailError(true);
-        setEmailSubmitted(false);
-      }
+        {
+          style: {
+            minWidth: '250px',
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+            fontSize: '18px',
+          },
+        }
+      );
     } catch (error) {
       console.error("An error occurred:", error);
       setEmailError(true);
       setEmailSubmitted(false);
-    } finally {
+    }
+    finally {
       setIsSending(false);
+      // Reset the form
+      e.target.reset();
     }
   };
 
