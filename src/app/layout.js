@@ -73,9 +73,11 @@ export default function RootLayout({ children }) {
       <ToastProvider>
       <main className="flex min-h-screen flex-col bg-[#030014] scroll-smooth">
         <StarsCanvas />
+        <div className='z-10'>
       <Navbar />
         {children}
         <Footer />
+        </div>
       </main>
       </ToastProvider>
         </body>
