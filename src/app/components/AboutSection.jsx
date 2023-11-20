@@ -107,7 +107,6 @@ const AboutSection = () => {
   useEffect(() => {
     // Fetch a random image index on initial render and on subsequent page reloads
     const randomIndex = Math.floor(Math.random() * images.length);
-    console.log(randomIndex)
     setCurrentImageIndex(randomIndex);
   }, []);
   
