@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import GithubIcon from "../../../public/github-icon.svg";
 import LinkedinIcon from "../../../public/linkedin-icon.svg";
 import XIcon from "../../../public/x-icon.svg";
@@ -9,11 +9,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { EnvelopeIcon } from "@heroicons/react/24/outline";
 import { toast } from 'react-hot-toast';
+import { Turnstile } from '@marsidev/react-turnstile'
 
 const EmailSection = () => {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [isSending, setIsSending] = useState(false);
+  const [status, setStatus] = useState("")
+  const captchaRef = useRef();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,6 +30,7 @@ const EmailSection = () => {
       email: e.target.email.value,
       subject: e.target.subject.value,
       message: e.target.message.value,
+      token: e.target['cf-turnstile-response'].value,
     };
 
     // Define the endpoint
@@ -78,6 +82,8 @@ const EmailSection = () => {
     }
     finally {
       setIsSending(false);
+      setStatus("")
+      captchaRef.current?.reset()
       // Reset the form
       e.target.reset();
     }
@@ -189,12 +195,25 @@ const EmailSection = () => {
               className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
               placeholder="Let's talk about..."
             />
+
           </div>
+          <Turnstile
+            siteKey='0x4AAAAAAANZ9isw01CpEZ7d'
+            ref={captchaRef}
+            className='mb-6'
+            options={{
+              theme: 'dark',
+            }}
+            onError={() => setStatus('error')}
+            onExpire={() => setStatus('expired')}
+            onSuccess={() => setStatus('solved')}
+          />
+
 
           <button
             type="submit"
             className="bg-primary-700 hover:bg-primary-800 text-white font-medium py-2.5 px-5 rounded-lg w-full"
-            disabled={isSending}
+            disabled={isSending || status !== 'solved'}
           >
             {isSending ? "Sending..." : "Send"}
           </button>

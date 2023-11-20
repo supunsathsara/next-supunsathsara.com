@@ -1,4 +1,5 @@
 // import { EmailTemplate } from '../../../components/EmailTemplate';
+import TurnstileVerify from "@/lib/TurnstileVerify";
 import { NextResponse } from "next/server";
 const sgMail = require('@sendgrid/mail');
 import { z } from "zod";
@@ -10,17 +11,18 @@ const schema = z.object({
   email: z.string().email(),
   subject: z.string().min(3).max(50),
   message: z.string().min(3).max(500),
+  token: z.string().min(3),
 });
 
 export async function POST(req, res) {
 
   const body = await req.json();
-  const { name, email, subject, message } = body;
-  if (!name || !email || !subject || !message) {
+  const { name, email, subject, message,token } = body;
+  if (!name || !email || !subject || !message, !token) {
     //send status 400
     return NextResponse.json({ success: false, message: "Invalid Request" }, { status: 400 });
   }
-  const data = { name, email, subject, message };
+  const data = { name, email, subject, message, token };
   try {
     schema.parse(data);
   }
@@ -111,6 +113,12 @@ export async function POST(req, res) {
 
   // console.log(name, email, subject, message);
   try {
+    const challenge = await TurnstileVerify(token);
+    
+    if (!challenge.success) {
+      return NextResponse.json({ success: false, message: "Captcha Failed" }, { status: 400 });
+    }
+
     const [adminResponse, clientResponse] = await Promise.all([
       sgMail.send(adminMsg),
       sgMail.send(clientMsg),
