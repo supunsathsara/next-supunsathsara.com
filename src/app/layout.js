@@ -2,6 +2,7 @@ import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import StarsCanvas from './components/StarBackground'
 import ToastProvider from './components/ToastProvider'
+import { Analytics } from "@vercel/analytics/react";
 import './globals.css'
 
 
@@ -80,6 +81,7 @@ export default function RootLayout({ children }) {
         </div>
       </main>
       </ToastProvider>
+      <Analytics />
         </body>
     </html>
   )
