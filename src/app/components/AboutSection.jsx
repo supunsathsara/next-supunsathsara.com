@@ -1,6 +1,7 @@
 "use client";
 import React, { useTransition, useState, useEffect } from "react";
 import Image from "next/image";
+import { differenceInYears, isToday } from 'date-fns';
 import TabButton from "./TabButton";
 import certificates from "@/constants/certificates";
 import AboutImage from "../../../public/images/about-1.jpg";
@@ -103,6 +104,8 @@ const AboutSection = () => {
   const [isPending, startTransition] = useTransition();
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [age, setAge] = useState(21);
+  const [isBirthday, setIsBirthday] = useState(false);
 
   useEffect(() => {
     // Fetch a random image index on initial render and on subsequent page reloads
@@ -116,14 +119,28 @@ const AboutSection = () => {
     });
   };
 
+  useEffect(() => {
+    const birthDate = new Date('2002-08-26');
+    const currentDate = new Date();
+    const calculatedAge = differenceInYears(currentDate, birthDate);
+
+    setAge(calculatedAge);
+    setIsBirthday(isToday(birthDate));
+
+  }, []);
+
   return (
     <section className="text-white z-10" id="about">
       <div className="md:grid md:grid-cols-2 gap-8 items-center py-8 px-4 xl:gap-16 sm:py-16 xl:px-16">
-        <Image className="shadow-lg z-10 rounded-sm" src={images[currentImageIndex]} width={500} alt="Me at 2023 Poson Dansela at NIBM"/>
+        <Image className="shadow-lg z-10 rounded-sm" src={images[currentImageIndex]} width={500} alt="About image"/>
         <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
           <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
           <p className="text-base lg:text-lg text-justify">
-          As a 21-year-old Software Engineering undergraduate at NIBM Sri Lanka, I&apos;m a quick learner driven by a passion for web development. 
+          As a {age}-year-old {
+            isBirthday ? (
+              <span className="animate-pulse" title="it's my birthday today! 🥳">🎂</span>
+            ) : null
+          } Software Engineering undergraduate at NIBM Sri Lanka, I&apos;m a quick learner driven by a passion for web development. 
           <br />
           My expertise encompasses a diverse array of technologies, including Node.js, Express.js, Next.js, Python, SQL, NoSQL, Tailwind, and Redis. With a strong foundation in backend development, I bring responsive web design to life. Beyond coding, I have a keen interest in cybersecurity stuff.
           <br />
