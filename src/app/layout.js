@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import StarsCanvas from './components/StarBackground'
 import ToastProvider from './components/ToastProvider'
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css'
 
 
@@ -20,8 +21,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link rel="canonical" href="https://supunsathsara.com/" />
-        <meta name="keywords" 
-        content="supun sathsara, savindu, Web Developer, Software Engineer, Node.js, Express.js, Next.js, Python, SQL, NoSQL, Tailwind, Redis, Responsive Web Design, Cybersecurity" />
+        <meta name="keywords"
+          content="supun sathsara, savindu, Web Developer, Software Engineer, Node.js, Express.js, Next.js, Python, SQL, NoSQL, Tailwind, Redis, Responsive Web Design, Cybersecurity" />
         <meta name="author" content="Supun Sathsara" />
 
         {/* favicon */}
@@ -71,18 +72,19 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className='overflow-x-hidden'>
-      <ToastProvider>
-      <main className="flex min-h-screen flex-col bg-[#030014] scroll-smooth">
-        <StarsCanvas />
-        <div className='z-10'>
-      <Navbar />
-        {children}
-        <Footer />
-        </div>
-      </main>
-      </ToastProvider>
-      <Analytics />
-        </body>
+        <ToastProvider>
+          <main className="flex min-h-screen flex-col bg-[#030014] scroll-smooth">
+            <StarsCanvas />
+            <div className='z-10'>
+              <Navbar />
+              {children}
+              <Footer />
+            </div>
+          </main>
+        </ToastProvider>
+        <Analytics />
+        <SpeedInsights />
+      </body>
     </html>
   )
 }
