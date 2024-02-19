@@ -89,6 +89,12 @@ const certificates = [
         url: 'https://www.freecodecamp.org/certification/supunsathsara/foundational-c-sharp-with-microsoft', 
         provider: 'Free Code Camp',
     },
+    {
+        id: 16,
+        name: 'Postman Student Leader',
+        url: 'https://api.badgr.io/public/assertions/b8ry_fbVQZyegkTtBybtEQ?identity__email=contact%40supunsathsara.com', 
+        provider: 'Postman',
+    },
 ];
 
 export default certificates;
