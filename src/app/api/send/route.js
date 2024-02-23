@@ -21,7 +21,7 @@ export async function POST(req, res) {
   const { name, email, subject, message, token } = body;
   if (!name || !email || !subject || !message, !token) {
     //send status 400
-    return NextResponse.json({ success: false, message: "Invalid Request" }, { status: 400, headers: getCorsHeaders(req.headers.get("origin") || "") });
+    return NextResponse.json({ success: false, message: "Invalid Request" }, { status: 400, headers: getCorsHeaders(req.headers.get("Origin") || req.headers.get("origin") || "") });
   }
   const data = { name, email, subject, message, token };
   try {
@@ -30,7 +30,7 @@ export async function POST(req, res) {
   catch (error) {
     return NextResponse.json({
       success: false, message: error.errors[0].message
-    }, { status: 400, headers: getCorsHeaders(req.headers.get("origin") || "") });
+    }, { status: 400, headers: getCorsHeaders(req.headers.get("Origin") || req.headers.get("origin") || "") });
   }
 
   const adminMsg = {
@@ -117,7 +117,7 @@ export async function POST(req, res) {
     const challenge = await TurnstileVerify(token);
 
     if (!challenge.success) {
-      return NextResponse.json({ success: false, message: "Captcha Failed" }, { status: 400, headers: getCorsHeaders(req.headers.get("origin") || "") });
+      return NextResponse.json({ success: false, message: "Captcha Failed" }, { status: 400, headers: getCorsHeaders(req.headers.get("Origin") || req.headers.get("origin") || "") });
     }
 
     const [adminResponse, clientResponse] = await Promise.all([
@@ -126,17 +126,21 @@ export async function POST(req, res) {
     ]);
     // console.log(adminResponse);
     if (adminResponse[0]?.statusCode == 202) {
-      return NextResponse.json({ success: true }, { status: 200, headers: getCorsHeaders(req.headers.get("origin") || "") });
+      return NextResponse.json({ success: true }, { status: 200, headers: getCorsHeaders(req.headers.get("Origin") || req.headers.get("origin") || "") });
     }
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ success: false, message: "Something went wrong" }, { status: 500, headers: getCorsHeaders(req.headers.get("origin") || "") });
+    return NextResponse.json({ success: false, message: "Something went wrong" }, { status: 500, headers: getCorsHeaders(req.headers.get("Origin") || req.headers.get("origin") || "") });
   }
 
-  return NextResponse.json({ success: false, message: "Something went wrong" }, { status: 500, headers: getCorsHeaders(req.headers.get("origin") || "") });
+  return NextResponse.json({ success: false, message: "Something went wrong" }, { status: 500, headers: getCorsHeaders(req.headers.get("Origin") || req.headers.get("origin") || "") });
 
 }
 
+export async function GET(req, res) {
+  console.log(req.headers)
+  return NextResponse.json({ success: false, message: "Invalid Request" }, { status: 400, headers: getCorsHeaders(req.headers.get("Origin") || req.headers.get("origin") || "") });
+}
 
 export const OPTIONS = async (request) => {
   // Return Response
@@ -144,7 +148,7 @@ export const OPTIONS = async (request) => {
     {},
     {
       status: 200,
-      headers: getCorsHeaders(request.headers.get("origin") || ""),
+      headers: getCorsHeaders(request.headers.get("Origin") || request.headers.get("origin") || ""),
     }
   );
 };
