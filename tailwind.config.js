@@ -18,6 +18,19 @@ module.exports = {
         primary: colors.purple,
         secondary: colors.cyan,
       },
+      animation: {
+        shimmer: "shimmer 3s linear infinite",
+      },
+      keyframes: {
+        shimmer: {
+          from: {
+            backgroundPosition: "0 0",
+          },
+          to: {
+            backgroundPosition: "-200% 0",
+          },
+        },
+      },
     },
   },
   plugins: [],
