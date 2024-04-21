@@ -1,11 +1,10 @@
 import Image from "next/image";
-import AboutImg from "../../../public/images/about-1.jpg";
-import WayForward from "../../../public/images/gallery/way-forward-to-the-dev-stage.jpg";
-import GoldMedal from "../../../public/images/gallery/gold-medal.jpg";
-import Convocation from "../../../public/images/gallery/convocation.jpg";
-import IntroGitEvent from "../../../public/images/gallery/intro-git-event.jpg";
-import Rugby from "../../../public/images/gallery/rugby.jpg";
-import NotifibmDemo from "../../../public/images/gallery/notifibm-demo.jpg";
+import WayForward from "@public/images/gallery/way-forward-to-the-dev-stage.jpg";
+import GoldMedal from "@public/images/gallery/gold-medal.jpg";
+import Convocation from "@public/images/gallery/convocation.jpg";
+import IntroGitEvent from "@public/images/gallery/intro-git-event.jpg";
+import Rugby from "@public/images/gallery/rugby.jpg";
+import NotifibmDemo from "@public/images/gallery/notifibm-demo.jpg";
 
 
 

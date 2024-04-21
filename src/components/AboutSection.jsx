@@ -4,9 +4,9 @@ import Image from "next/image";
 import { differenceInYears, isToday } from 'date-fns';
 import TabButton from "./TabButton";
 import certificates from "@/constants/certificates";
-import AboutImage from "../../../public/images/about-1.jpg";
-import AboutImage2 from "../../../public/images/about-2.jpg";
-import AboutImage3 from "../../../public/images/about-3.jpg";
+import AboutImage from "@public/images/about-1.jpg";
+import AboutImage2 from "@public/images/about-2.jpg";
+import AboutImage3 from "@public/images/about-3.jpg";
 
 
 const TAB_DATA = [

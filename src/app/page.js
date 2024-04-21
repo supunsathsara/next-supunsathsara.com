@@ -1,13 +1,11 @@
 import Image from "next/image";
-import HeroSection from "./components/HeroSection";
-import Navbar from "./components/Navbar";
-import AboutSection from "./components/AboutSection";
-import ProjectsSection from "./components/ProjectsSection";
-import EmailSection from "./components/EmailSection";
-import Footer from "./components/Footer";
-import AchievementsSection from "./components/AchievementsSection";
-import GallerySection from "./components/GallerySection";
-import HolopinBoard from "./components/HolopinBoard";
+import HeroSection from "@/components/HeroSection";
+import AboutSection from "@/components/AboutSection";
+import ProjectsSection from "@/components/ProjectsSection";
+import EmailSection from "@/components/EmailSection";
+import AchievementsSection from "@/components/AchievementsSection";
+import GallerySection from "@/components/GallerySection";
+import HolopinBoard from "@/components/HolopinBoard";
 
 export default function Home() {
   return (
