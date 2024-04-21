@@ -64,7 +64,7 @@ export default function RootLayout({ children }) {
         />
         <meta
           name="twitter:description"
-          content="A Developer based specializing in building exceptional websites, applications, and everything in between."
+          content="A Developer specializing in building exceptional websites, applications, and everything in between."
         />
         <meta
           name="twitter:image"
