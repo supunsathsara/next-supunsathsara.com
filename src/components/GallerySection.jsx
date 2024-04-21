@@ -13,7 +13,7 @@ import NotifibmDemo from "@public/images/gallery/notifibm-demo.jpg";
 
 const GallerySection = () => {
     return (
-        <section className="gallery-section max-w-3xl 3xl:max-4xl mx-auto mb-8 pb-4">
+        <section className="gallery-section max-w-3xl 3xl:max-4xl mx-auto mb-8 pb-4 pt-4">
             <div className="columns-2 sm:columns-3 gap-4 my-8">
                 <div className="relative h-40 mb-4">
                     <Image
