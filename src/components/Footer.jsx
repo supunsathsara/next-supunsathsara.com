@@ -2,6 +2,7 @@ import React from "react";
 import Logo from "@public/images/white Logo-typography.png";
 import Image from "next/image";
 import Link from "next/link";
+import StatusIndicator from "./StatusIndicator";
 
 const Footer = () => {
   return (
@@ -15,19 +16,23 @@ const Footer = () => {
           className="my-auto mx-auto md:mx-0 w-1/2 sm:w-[300px]"
         />
         <div className="my-auto mx-auto md:mx-0">
-        <p className="text-slate-400">All rights reserved &copy; 2023</p>
+          <p className="text-slate-400">All rights reserved &copy; 2023</p>
         </div>
         <div className="my-auto">
           {/**Legal */}
           <ul className="flex flex-col space-y-1 md:space-y-2">
-          <li>
+            <li>
               <Link
                 href="https://status.supunsathsara.com"
-                className="text-slate-400 hover:text-white"
+                className="flex items-center text-slate-400 hover:text-white"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span className="animate-pulse opacity-30 text-sm blur-sm mr-1">🟢</span>
+                {/* <span className="relative flex h-3 w-3 mr-1">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                </span> */}
+                <StatusIndicator />
                 Status
               </Link>
             </li>
@@ -40,14 +45,11 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link
-                href="/terms"
-                className="text-slate-400 hover:text-white"
-              >
+              <Link href="/terms" className="text-slate-400 hover:text-white">
                 Terms and Conditions
               </Link>
             </li>
-          </ul>  
+          </ul>
         </div>
       </div>
     </footer>
