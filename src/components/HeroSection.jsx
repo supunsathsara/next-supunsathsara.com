@@ -54,7 +54,7 @@ const HeroSection = () => {
               title="Download My CV"
               className="px-1 inline-block py-1 w-full sm:w-fit rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-800 text-white mt-3"
             >
-              <span className="block bg-[#121212] hover:bg-slate-800 rounded-full px-5 py-2">
+              <span className="block animate-shimmer bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] bg-[#121212] hover:bg-slate-800 rounded-full px-5 py-2">
                 Download CV
               </span>
             </a>

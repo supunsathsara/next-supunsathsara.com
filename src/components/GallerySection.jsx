@@ -1,11 +1,10 @@
 import Image from "next/image";
-import AboutImg from "../../../public/images/about-1.jpg";
-import WayForward from "../../../public/images/gallery/way-forward-to-the-dev-stage.jpg";
-import GoldMedal from "../../../public/images/gallery/gold-medal.jpg";
-import Convocation from "../../../public/images/gallery/convocation.jpg";
-import IntroGitEvent from "../../../public/images/gallery/intro-git-event.jpg";
-import Rugby from "../../../public/images/gallery/rugby.jpg";
-import NotifibmDemo from "../../../public/images/gallery/notifibm-demo.jpg";
+import WayForward from "@public/images/gallery/way-forward-to-the-dev-stage.jpg";
+import GoldMedal from "@public/images/gallery/gold-medal.jpg";
+import Convocation from "@public/images/gallery/convocation.jpg";
+import IntroGitEvent from "@public/images/gallery/intro-git-event.jpg";
+import Rugby from "@public/images/gallery/rugby.jpg";
+import NotifibmDemo from "@public/images/gallery/notifibm-demo.jpg";
 
 
 
@@ -14,7 +13,7 @@ import NotifibmDemo from "../../../public/images/gallery/notifibm-demo.jpg";
 
 const GallerySection = () => {
     return (
-        <section className="gallery-section max-w-3xl 3xl:max-4xl mx-auto mb-8 pb-4">
+        <section className="gallery-section max-w-3xl 3xl:max-4xl mx-auto mb-8 pb-4 pt-4">
             <div className="columns-2 sm:columns-3 gap-4 my-8">
                 <div className="relative h-40 mb-4">
                     <Image

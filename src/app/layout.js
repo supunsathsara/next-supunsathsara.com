@@ -1,7 +1,7 @@
-import Footer from './components/Footer'
-import Navbar from './components/Navbar'
-import StarsCanvas from './components/StarBackground'
-import ToastProvider from './components/ToastProvider'
+import Footer from '@/components/Footer'
+import Navbar from '@/components/Navbar'
+import StarsCanvas from '@/components/StarBackground'
+import ToastProvider from '@/components/ToastProvider'
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css'
@@ -64,7 +64,7 @@ export default function RootLayout({ children }) {
         />
         <meta
           name="twitter:description"
-          content="A Developer based specializing in building exceptional websites, applications, and everything in between."
+          content="A Developer specializing in building exceptional websites, applications, and everything in between."
         />
         <meta
           name="twitter:image"

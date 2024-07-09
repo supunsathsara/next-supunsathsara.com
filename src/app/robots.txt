@@ -20,3 +20,5 @@ User-agent: *
 Disallow: 
 Crawl-delay: 10
 Disallow: /cgi-bin/
+
+Sitemap: https://supunsathsara.com/sitemap.xml
