@@ -7,6 +7,7 @@ import certificates from "@/constants/certificates";
 import AboutImage from "@public/images/about-1.jpg";
 import AboutImage2 from "@public/images/about-2.jpg";
 import AboutImage3 from "@public/images/about-3.jpg";
+import Link from "next/link";
 
 const TAB_DATA = [
   {
@@ -79,21 +80,36 @@ const TAB_DATA = [
     title: "Certifications",
     id: "certifications",
     content: (
-      <ul className="list-disc pl-2">
-        {certificates.map((certificate) => (
-          <li key={certificate.id}>
-            <a
-              href={certificate.url}
-              className="text-blue-500 hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {certificate.name}
-            </a>{" "}
-            by {certificate.provider}
-          </li>
-        ))}
-      </ul>
+      <div>
+        <ul className="list-disc pl-2">
+          {certificates.slice(-10).map((certificate) => (
+            <li key={certificate.id}>
+              <a
+                href={certificate.url}
+                className="text-blue-500 hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {certificate.name}
+              </a>{" "}
+              by {certificate.provider}
+            </li>
+          ))}
+        </ul>
+        <p className="
+          text-sm text-gray-300 mt-4
+          hover:text-white hover:underline
+        ">
+          <Link
+            href="/certifications"
+            className="hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View more
+          </Link>
+        </p>
+      </div>
     ),
   },
 ];
@@ -191,7 +207,7 @@ const AboutSection = () => {
               Certifications{" "}
             </TabButton>
           </div>
-          <div className="mt-8">
+          <div className="mt-4">
             {TAB_DATA.find((t) => t.id === tab).content}
           </div>
         </div>
