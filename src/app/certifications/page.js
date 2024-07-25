@@ -13,7 +13,7 @@ export default function CertificationPage() {
             </div>
 
             <ul className="m-2 mt-[8px] mx-5 font-normal sm:text-lg text-sm text-start text-white space-y-4 list-disc">
-            {certificates.reverse().map((certificate, index) => (
+            {certificates.sort((a, b) => b.id - a.id).map((certificate, index) => (
                     <CertificateItem key={index} certificate={certificate} index={index} />
                 ))}
             </ul>
