@@ -56,7 +56,7 @@ const certificates = [
     {
         id: 10,
         name: 'Cybersecurity Essentials',
-        url: 'https://www.credly.com/badges/4f6f0f48-1d22-492f-91c1-7ed5f52f9ca8/public_url',
+        url: 'https://www.credly.com/badges/7c9c873a-d7c0-4e1e-8c95-eb0e304b2653/public_url',
         provider: 'Cisco Network Academy',
     },
     {
