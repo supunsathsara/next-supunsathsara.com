@@ -7,16 +7,18 @@ export default function CertificationPage() {
         <div className="container min-h-screen mx-auto mt-24 my-8 relative z-5 text-center flex flex-col md:flex-col md:flex-wrap pb-12">
             <div className="my-4 text-center mx-auto">
                 <GradualSpacing
-                    className="font-display my-4 text-center text-4xl font-bold tracking-[-0.1em]  text-white md:text-7xl md:leading-[5rem]"
+                    className="font-display my-4 text-center text-4xl font-bold  text-white md:text-7xl md:leading-[5rem]"
                     text="Certifications"
                 />
             </div>
 
-            <ul className="m-2 mt-[8px] mx-5 font-normal sm:text-lg text-sm text-start text-white space-y-4 list-disc">
-            {certificates.sort((a, b) => b.id - a.id).map((certificate, index) => (
-                    <CertificateItem key={index} certificate={certificate} index={index} />
-                ))}
-            </ul>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-7xl mx-auto md:px-8 w-full">
+                {certificates
+                    .sort((a, b) => b.id - a.id)
+                    .map((certificate, index) => (
+                        <CertificateItem key={index} certificate={certificate} index={index} />
+                    ))}
+            </div>
         </div>
     );
 }
