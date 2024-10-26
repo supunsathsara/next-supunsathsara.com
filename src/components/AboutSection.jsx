@@ -96,16 +96,13 @@ const TAB_DATA = [
             </li>
           ))}
         </ul>
-        <p className="
+        <p
+          className="
           text-sm text-gray-300 mt-4
           hover:text-white hover:underline
-        ">
-          <Link
-            href="/certifications"
-            className="hover:underline"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+        "
+        >
+          <Link href="/certifications" className="hover:underline">
             View more
           </Link>
         </p>
