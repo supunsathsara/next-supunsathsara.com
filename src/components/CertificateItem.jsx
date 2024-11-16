@@ -16,7 +16,7 @@ const CertificateItem = ({ certificate, index }) => {
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       <motion.div
-        className="rounded-lg relative bg-gray-100 dark:bg-neutral-900 overflow-hidden h-60 md:h-50 w-full transition-all duration-300 ease-out"
+        className="rounded-lg relative bg-neutral-900 overflow-hidden h-60 md:h-50 w-full transition-all duration-300 ease-out"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={() => setIsFullScreen(true)}
@@ -49,10 +49,10 @@ const CertificateItem = ({ certificate, index }) => {
       </motion.div>
 
       <div className="mt-4 text-center">
-        <div className="text-xl md:text-2xl font-medium text-gray-900 dark:text-gray-100">
+        <div className="text-xl md:text-2xl font-medium text-gray-100">
           {certificate.name}
         </div>
-        <div className="text-md md:text-lg text-gray-700 dark:text-gray-300">
+        <div className="text-md md:text-lg text-gray-300">
           {certificate.provider}
         </div>
       </div>

@@ -130,7 +130,7 @@ const EmailSection = () => {
           data-cal-namespace="quick-chat"
           data-cal-link="supunsathsara/quick-chat"
           data-cal-config='{"layout":"month_view"}'
-          className="flex items-center justify-center px-12 py-2 ring-white ring-1 my-8 animate-shimmer bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] bg-[#121212] hover:bg-slate-800 rounded-lg"
+          className="flex items-center justify-center px-12 py-2 ring-white text-white ring-1 my-8 animate-shimmer bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] bg-[#121212] hover:bg-slate-800 rounded-lg"
         >
           <CalendarIcon className="h-5 w-5 mr-2" />
           <span>Let&apos;s Schedule a Call</span>
