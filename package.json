@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@calcom/embed-react": "^1.5.1",
     "@heroicons/react": "^2.0.18",
     "@marsidev/react-turnstile": "^0.3.2",
     "@sendgrid/mail": "^8.1.0",

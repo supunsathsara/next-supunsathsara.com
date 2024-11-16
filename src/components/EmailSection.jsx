@@ -1,22 +1,34 @@
-'use client';
+"use client";
 
-import { useRef, useState } from "react";
+import { getCalApi } from "@calcom/embed-react";
+import { CalendarIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
+import { Turnstile } from "@marsidev/react-turnstile";
 import GithubIcon from "@public/github-icon.svg";
+import InstaIcon from "@public/instagram-icon.svg";
 import LinkedinIcon from "@public/linkedin-icon.svg";
 import XIcon from "@public/x-icon.svg";
-import InstaIcon from "@public/instagram-icon.svg";
-import Link from "next/link";
 import Image from "next/image";
-import { EnvelopeIcon } from "@heroicons/react/24/outline";
-import { toast } from 'react-hot-toast';
-import { Turnstile } from '@marsidev/react-turnstile'
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import { toast } from "react-hot-toast";
 
 const EmailSection = () => {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [isSending, setIsSending] = useState(false);
-  const [status, setStatus] = useState("")
+  const [status, setStatus] = useState("");
   const captchaRef = useRef();
+
+  useEffect(() => {
+    (async function () {
+      const cal = await getCalApi({ namespace: "30min" });
+      cal("ui", {
+        styles: { branding: { brandColor: "#030014" } },
+        hideEventTypeDetails: false,
+        layout: "month_view",
+      });
+    })();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +42,7 @@ const EmailSection = () => {
       email: e.target.email.value,
       subject: e.target.subject.value,
       message: e.target.message.value,
-      token: e.target['cf-turnstile-response'].value,
+      token: e.target["cf-turnstile-response"].value,
     };
 
     // Define the endpoint
@@ -46,32 +58,31 @@ const EmailSection = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(data),
-        })
-          .then((response) => {
-            if (response.status === 200) {
-              // Success
-              setEmailSubmitted(true);
-              setEmailError(false);
-              return response.json();
-            } else {
-              // Error
-              setEmailError(true);
-              setEmailSubmitted(false);
-              throw new Error('An error occurred. Please try again later.');
-            }
-          }),
+        }).then((response) => {
+          if (response.status === 200) {
+            // Success
+            setEmailSubmitted(true);
+            setEmailError(false);
+            return response.json();
+          } else {
+            // Error
+            setEmailError(true);
+            setEmailSubmitted(false);
+            throw new Error("An error occurred. Please try again later.");
+          }
+        }),
         {
-          loading: 'Sending...',
-          success: 'Email sent successfully!',
-          error: 'An error occurred. Please try again later.',
+          loading: "Sending...",
+          success: "Email sent successfully!",
+          error: "An error occurred. Please try again later.",
         },
         {
           style: {
-            minWidth: '250px',
-            borderRadius: '10px',
-            background: '#333',
-            color: '#fff',
-            fontSize: '18px',
+            minWidth: "250px",
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+            fontSize: "18px",
           },
         }
       );
@@ -79,17 +90,14 @@ const EmailSection = () => {
       console.error("An error occurred:", error);
       setEmailError(true);
       setEmailSubmitted(false);
-    }
-    finally {
+    } finally {
       setIsSending(false);
-      setStatus("")
-      captchaRef.current?.reset()
+      setStatus("");
+      captchaRef.current?.reset();
       // Reset the form
       e.target.reset();
     }
   };
-
-
 
   return (
     <section
@@ -103,26 +111,73 @@ const EmailSection = () => {
         </h2>
         <p className="text-[#ADB7BE] mb-4 max-w-md">
           {" "}
-          I love to code and I&apos;m always looking for new opportunities to learn and grow. I&apos;m currently working on a few projects and I&apos;m always open to new ideas and collaborations. If you have any questions or want to work with me, feel free to contact me.
+          I love to code and I&apos;m always looking for new opportunities to
+          learn and grow. I&apos;m currently working on a few projects and
+          I&apos;m always open to new ideas and collaborations. If you have any
+          questions or want to work with me, feel free to contact me.
         </p>
         <p className="text-lg font-semibold my-5 text-white">
           <EnvelopeIcon className="inline-block mr-2 h-6 w-6 text-white" />
-          <a href="mailto:contact@supunsathsara.com" className="hover:underline">
+          <a
+            href="mailto:contact@supunsathsara.com"
+            className="hover:underline"
+          >
             contact@supunsathsara.com
           </a>
         </p>
+        <button
+          data-cal-namespace="30min"
+          data-cal-link="supunsathsara/30min"
+          data-cal-config='{"layout":"month_view"}'
+          className="flex items-center justify-center px-12 py-2 ring-white ring-1 my-8 animate-shimmer bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] bg-[#121212] hover:bg-slate-800 rounded-lg"
+        >
+          <CalendarIcon className="h-5 w-5 mr-2" />
+          <span>Let's Schedule a Call</span>
+        </button>
+
         <div className="socials flex flex-row gap-2">
-          <Link href="https://github.com/supunsathsara" title="Supun Sathsara on github" target="_blank" rel="noopener noreferrer">
+          <Link
+            href="https://github.com/supunsathsara"
+            title="Supun Sathsara on github"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Image src={GithubIcon} alt="Github Icon" />
           </Link>
-          <Link href="https://www.linkedin.com/in/supunsathsara/" title="Supun Sathsara on LinkedIn" target="_blank" rel="noopener noreferrer">
+          <Link
+            href="https://www.linkedin.com/in/supunsathsara/"
+            title="Supun Sathsara on LinkedIn"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Image src={LinkedinIcon} alt="Linkedin Icon" />
           </Link>
-          <Link href="https://twitter.com/ssupunsathsara" title="Supun Sathsara on Twitter" target="_blank" rel="noopener noreferrer">
-            <Image className="p-2" src={XIcon} height={48} width={48} alt="X Icon" />
+          <Link
+            href="https://twitter.com/ssupunsathsara"
+            title="Supun Sathsara on Twitter"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              className="p-2"
+              src={XIcon}
+              height={48}
+              width={48}
+              alt="X Icon"
+            />
           </Link>
-          <Link href="https://www.instagram.com/s_supun_sathsara" title="Supun Sathsara on Instagram" target="_blank" rel="noopener noreferrer">
-            <Image className="p-1" src={InstaIcon} height={48} alt="Instagram Icon" />
+          <Link
+            href="https://www.instagram.com/s_supun_sathsara"
+            title="Supun Sathsara on Instagram"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              className="p-1"
+              src={InstaIcon}
+              height={48}
+              alt="Instagram Icon"
+            />
           </Link>
         </div>
       </div>
@@ -162,8 +217,6 @@ const EmailSection = () => {
                 placeholder="jacob@google.com"
               />
             </div>
-
-
           </div>
           <div className="mb-6">
             <label
@@ -195,25 +248,23 @@ const EmailSection = () => {
               className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
               placeholder="Let's talk about..."
             />
-
           </div>
           <Turnstile
-            siteKey='0x4AAAAAAANZ9isw01CpEZ7d'
+            siteKey="0x4AAAAAAANZ9isw01CpEZ7d"
             ref={captchaRef}
-            className='mb-6'
+            className="mb-6"
             options={{
-              theme: 'dark',
+              theme: "dark",
             }}
-            onError={() => setStatus('error')}
-            onExpire={() => setStatus('expired')}
-            onSuccess={() => setStatus('solved')}
+            onError={() => setStatus("error")}
+            onExpire={() => setStatus("expired")}
+            onSuccess={() => setStatus("solved")}
           />
-
 
           <button
             type="submit"
             className="bg-primary-700 hover:bg-primary-800 disabled:bg-primary-900 text-white font-medium py-2.5 px-5 rounded-lg w-full"
-            disabled={isSending || status !== 'solved'}
+            disabled={isSending || status !== "solved"}
           >
             {isSending ? "Sending..." : "Send"}
           </button>
