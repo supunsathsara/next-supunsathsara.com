@@ -23,6 +23,7 @@ const EmailSection = () => {
     (async function () {
       const cal = await getCalApi({ namespace: "30min" });
       cal("ui", {
+        theme: "dark",
         styles: { branding: { brandColor: "#030014" } },
         hideEventTypeDetails: false,
         layout: "month_view",
