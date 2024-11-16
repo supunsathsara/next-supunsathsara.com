@@ -21,7 +21,7 @@ const EmailSection = () => {
 
   useEffect(() => {
     (async function () {
-      const cal = await getCalApi({ namespace: "30min" });
+      const cal = await getCalApi({ namespace: "quick-chat" });
       cal("ui", {
         theme: "dark",
         styles: { branding: { brandColor: "#030014" } },
@@ -127,8 +127,8 @@ const EmailSection = () => {
           </a>
         </p>
         <button
-          data-cal-namespace="30min"
-          data-cal-link="supunsathsara/30min"
+          data-cal-namespace="quick-chat"
+          data-cal-link="supunsathsara/quick-chat"
           data-cal-config='{"layout":"month_view"}'
           className="flex items-center justify-center px-12 py-2 ring-white ring-1 my-8 animate-shimmer bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] bg-[#121212] hover:bg-slate-800 rounded-lg"
         >
