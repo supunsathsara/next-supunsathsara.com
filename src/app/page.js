@@ -16,7 +16,7 @@ export default function Home() {
         <AchievementsSection />
         <AboutSection />
         <HolopinBoard />
-        <YoutubePlayer />  
+        <YoutubePlayer />
         <GallerySection />
         <ProjectsSection />
         <EmailSection />

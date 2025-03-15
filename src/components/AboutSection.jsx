@@ -7,6 +7,7 @@ import certificates from "@/constants/certificates";
 import AboutImage from "@public/images/about-1.jpg";
 import AboutImage2 from "@public/images/about-2.jpg";
 import AboutImage3 from "@public/images/about-3.jpg";
+import AboutImage4 from "@public/images/about-4.jpg";
 import Link from "next/link";
 
 const TAB_DATA = [
@@ -111,7 +112,7 @@ const TAB_DATA = [
   },
 ];
 
-const images = [AboutImage, AboutImage2, AboutImage3];
+const images = [AboutImage, AboutImage2, AboutImage3, AboutImage4];
 
 const AboutSection = () => {
   const [tab, setTab] = useState("skills");
@@ -165,21 +166,20 @@ const AboutSection = () => {
             ) : null}{" "}
             Software Engineering undergraduate at NIBM Sri Lanka, I&apos;m a
             quick learner driven by a passion for web development.
-            <br />I currently work part-time as an{" "}
+            <br />I am an{" "}
             <span className="font-bold hover:bg-primary-500 bg-white text-[#030014] rounded-sm px-1">
-              Academic Tutor
+              Associate Software Engineer
             </span>{" "}
-            at NIBM, where I am dedicated to providing educational support and
-            fostering a learning environment for students. Additionally, I am
-            involved as a{" "}
+            at Expernetic, where I develop and maintain web applications, APIs,
+            and microservices. Additionally, I am involved as a{" "}
             <span className="font-bold text-[#030014] bg-white hover:bg-[#FF6C37] hover:text-white rounded-sm px-1">
               Postman Student Leader
             </span>
             , where I lead and mentor in the Postman student community.
             <br />
-            With a strong foundation in backend development, I bring responsive
-            web design to life. I am dedicated to crafting efficient solutions
-            and continuously innovating in the tech world.
+            With a strong foundation in web development, I bring responsive web
+            design to life. I am dedicated to crafting efficient solutions and
+            continuously innovating in the tech world.
           </p>
           <div className="flex flex-row justify-start mt-8">
             <TabButton

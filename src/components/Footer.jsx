@@ -5,6 +5,7 @@ import Link from "next/link";
 import StatusIndicator from "./StatusIndicator";
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
   return (
     <footer className="footer border z-10 border-t-[#33353F] border-l-transparent border-r-transparent text-white">
       <div className="container p-12 flex flex-col gap-3 md:gap-0 md:flex-row justify-between my-auto mx-auto">
@@ -15,8 +16,10 @@ const Footer = () => {
           quality={100}
           className="my-auto mx-auto md:mx-0 w-1/2 sm:w-[300px]"
         />
-        <div className="my-auto mx-auto md:mx-0">
-          <p className="text-slate-400">All rights reserved &copy; 2023</p>
+        <div className="my-auto mx-auto md:mx-0 text-center">
+          <p className="text-slate-400">
+            All rights reserved &copy; 2023 - {currentYear}
+          </p>
         </div>
         <div className="my-auto">
           {/**Legal */}
