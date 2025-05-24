@@ -12,7 +12,7 @@
     "@calcom/embed-react": "^1.5.1",
     "@heroicons/react": "^2.0.18",
     "@marsidev/react-turnstile": "^0.3.2",
-    "@sendgrid/mail": "^8.1.0",
+    "@sendgrid/mail": "^8.1.5",
     "@vercel/analytics": "^1.1.1",
     "@vercel/speed-insights": "^1.0.9",
     "autoprefixer": "10.4.15",
