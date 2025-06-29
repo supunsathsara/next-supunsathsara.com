@@ -1,4 +1,3 @@
-import Image from "next/image";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import ProjectsSection from "@/components/ProjectsSection";
@@ -11,8 +10,8 @@ import YoutubePlayer from "@/components/YoutubePlayer";
 export default function Home() {
   return (
     <>
-      <div className="container mt-24 mx-auto px-12 py-4">
-        <HeroSection />
+      <HeroSection />
+      <div className="container mx-auto px-12 py-4">
         <AchievementsSection />
         <AboutSection />
         <HolopinBoard />
