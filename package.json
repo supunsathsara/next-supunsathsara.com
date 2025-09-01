@@ -22,7 +22,7 @@
     "eslint-config-next": "^14.2.18",
     "framer-motion": "^10.18.0",
     "motion": "^12.19.2",
-    "next": "^14.2.26",
+    "next": "^14.2.32",
     "postcss": "8.4.31",
     "react": "^18.3.1",
     "react-animated-numbers": "^0.16.0",
