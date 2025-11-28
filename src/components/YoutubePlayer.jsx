@@ -4,13 +4,13 @@ import YouTube from "react-youtube";
 
 const YoutubePlayer = () => {
   return (
-    <div className="relative mx-4 rounded-xl aspect-video md:mx-auto max-w-3xl mt-8 mb-8 bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:rounded-2xl lg:p-4">
+    <div className="relative mx-4 rounded-xl aspect-video md:mx-auto max-w-3xl mt-16 md:mt-8 mb-8 bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:rounded-2xl lg:p-4 overflow-visible">
       {/* Fun handwritten arrow and text */}
-      <div className="absolute -top-8 -right-12 md:-top-10 md:-right-16 lg:-right-20 z-10 transform rotate-12 w-40 md:w-48">
+      <div className="absolute -top-10 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:-top-10 md:-right-16 lg:-right-20 z-10 transform md:rotate-12 w-auto md:w-48">
         <div className="relative">
           {/* Handwritten text */}
           <p
-            className="text-yellow-400 text-base md:text-lg lg:text-xl font-bold mb-2 transform -rotate-6 whitespace-nowrap"
+            className="text-yellow-400 text-sm md:text-lg lg:text-xl font-bold mb-2 transform md:-rotate-6 whitespace-nowrap text-center md:text-left"
             style={{
               fontFamily: "Kalam, cursive",
               textShadow: "2px 2px 4px rgba(0,0,0,0.3)",
@@ -19,9 +19,9 @@ const YoutubePlayer = () => {
           >
             🏆 Won The NIBM Gold Medal!
           </p>
-          {/* Curly arrow SVG */}
+          {/* Curly arrow SVG - hidden on mobile */}
           <svg
-            className="w-16 h-16 md:w-20 md:h-20 text-yellow-400 animate-bounce"
+            className="hidden md:block w-20 h-20 text-yellow-400 animate-bounce"
             viewBox="0 0 100 100"
             style={{ filter: "drop-shadow(0 0 6px rgba(255, 193, 7, 0.6))" }}
           >
