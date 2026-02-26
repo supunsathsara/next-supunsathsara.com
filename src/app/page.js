@@ -6,10 +6,12 @@ import AchievementsSection from "@/components/AchievementsSection";
 import GallerySection from "@/components/GallerySection";
 import HolopinBoard from "@/components/HolopinBoard";
 import YoutubePlayer from "@/components/YoutubePlayer";
+import CinematicIntro from "@/components/CinematicIntro";
 
 export default function Home() {
   return (
     <>
+      <CinematicIntro />
       <HeroSection />
       <div className="container mx-auto px-12 py-4">
         <AchievementsSection />

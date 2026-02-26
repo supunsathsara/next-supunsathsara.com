@@ -3,24 +3,18 @@ import React, {
   useTransition,
   useState,
   useEffect,
+  useRef,
   useMemo,
   useCallback,
 } from "react";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import TabButton from "./TabButton";
 import certificates from "@/constants/certificates";
-import { useRandomImage, useAgeCalculation } from "@/hooks";
-import AboutImage from "@public/images/about-1.jpg";
-import AboutImage2 from "@public/images/about-2.jpg";
-import AboutImage3 from "@public/images/about-3.jpg";
-import AboutImage4 from "@public/images/about-4.jpg";
-import AboutImage5 from "@public/images/about-5.jpg";
+import { useAgeCalculation } from "@/hooks";
 import Link from "next/link";
 
 // Constants
 const BIRTH_DATE = new Date("2002-08-26");
-const IMAGES = [AboutImage, AboutImage2, AboutImage3, AboutImage4, AboutImage5];
 
 // Skills component
 const SkillsList = () => {
@@ -134,10 +128,17 @@ const TAB_CONFIG = [
 const AboutSection = () => {
   const [tab, setTab] = useState("skills");
   const [isPending, startTransition] = useTransition();
+  const videoRef = useRef(null);
 
   // Custom hooks
-  const currentImage = useRandomImage(IMAGES);
   const { age, isBirthday } = useAgeCalculation(BIRTH_DATE);
+
+  // Ensure video plays on mount
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
+  }, []);
 
   const handleTabChange = useCallback(
     (id) => {
@@ -157,16 +158,52 @@ const AboutSection = () => {
   return (
     <section className="text-white z-10" id="about">
       <div className="md:grid md:grid-cols-2 gap-8 items-center py-8 px-4 xl:gap-16 sm:py-16 xl:px-16">
-        <Image
-          className="shadow-lg z-10 rounded-sm"
-          src={currentImage}
-          width={500}
-          height={500}
-          alt="About image"
-          priority={false}
-          placeholder="blur"
-        />
-        <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="relative z-10 flex items-center justify-center"
+        >
+          {/* Video container with edge-blending gradients */}
+          <div className="relative w-full max-w-[500px] aspect-[9/16] overflow-hidden">
+            <video
+              ref={videoRef}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              poster="/images/intro-poster.jpg"
+              className="w-full h-full object-cover"
+              style={{ background: "#030014" }}
+            >
+              <source src="/intro.webm" type="video/webm" />
+              <source src="/intro.mp4" type="video/mp4" />
+            </video>
+            {/* Edge-blend gradients to dissolve video into background */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: `
+                  linear-gradient(to top, #030014 0%, transparent 18%),
+                  linear-gradient(to bottom, #030014 0%, transparent 18%),
+                  linear-gradient(to left, #030014 0%, transparent 12%),
+                  linear-gradient(to right, #030014 0%, transparent 12%)
+                `,
+              }}
+            />
+            {/* Purple tint overlay to match website palette */}
+            <div
+              className="absolute inset-0 pointer-events-none mix-blend-screen"
+              style={{
+                background:
+                  "radial-gradient(ellipse at 50% 40%, rgba(88, 28, 135, 0.08) 0%, rgba(3, 0, 20, 0.15) 100%)",
+              }}
+            />
+          </div>
+        </motion.div>
+            <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
           <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
           <p className="text-base lg:text-lg text-justify">
             As a {age}-year-old{" "}
