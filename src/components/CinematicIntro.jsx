@@ -5,16 +5,14 @@ import { motion, AnimatePresence } from "framer-motion";
 const CinematicIntro = ({ onComplete }) => {
   const [phase, setPhase] = useState("loading"); // "loading" | "playing" | "text" | "exit" | "done"
   const videoRef = useRef(null);
+  const backdropRef = useRef(null);
   const hasTriggeredExit = useRef(false);
 
-  // Check if intro was already shown this session
+  // Skip intro if already shown this session (prevents replay on navigation)
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const shown = sessionStorage.getItem("intro-shown");
-      if (shown) {
-        setPhase("done");
-        onComplete?.();
-      }
+    if (typeof window !== "undefined" && sessionStorage.getItem("intro-shown")) {
+      setPhase("done");
+      onComplete?.();
     }
   }, [onComplete]);
 
@@ -34,13 +32,18 @@ const CinematicIntro = ({ onComplete }) => {
     if (!video || phase !== "loading") return;
 
     const startPlayback = () => {
+      // Start both videos together
+      const backdrop = backdropRef.current;
+      if (backdrop) {
+        backdrop.currentTime = 0;
+        backdrop.play().catch(() => {});
+      }
       video
         .play()
         .then(() => setPhase("playing"))
         .catch(() => {
           // Autoplay blocked — skip intro gracefully
           setPhase("done");
-          sessionStorage.setItem("intro-shown", "true");
           onComplete?.();
         });
     };
@@ -123,24 +126,55 @@ const CinematicIntro = ({ onComplete }) => {
         >
           {/* Video layer */}
           <motion.div
-            className="relative w-full h-full flex items-center justify-center"
+            className="relative w-full h-full flex items-center justify-center overflow-hidden"
             animate={{
               scale: phase === "text" || phase === "exit" ? 1.05 : 1,
             }}
             transition={{ duration: 2, ease: "easeOut" }}
           >
+            {/* Blurred backdrop — fills the entire screen with ambient motion */}
             <video
-              ref={videoRef}
+              ref={backdropRef}
+              autoPlay
               muted
               playsInline
               preload="auto"
-              poster="/images/intro-poster.jpg"
-              className="h-full w-auto max-w-none object-contain"
+              className="absolute inset-0 w-full h-full object-cover blur-[60px] scale-150 opacity-60"
               style={{ background: "transparent" }}
+              aria-hidden="true"
             >
               <source src="/intro.webm" type="video/webm" />
               <source src="/intro.mp4" type="video/mp4" />
             </video>
+
+            {/* Main sharp video with soft feathered edges */}
+            <div className="relative z-10 h-full flex items-center justify-center">
+              <video
+                ref={videoRef}
+                autoPlay
+                muted
+                playsInline
+                preload="auto"
+                poster="/images/intro-poster.jpg"
+                className="h-full w-auto max-w-none object-contain"
+                style={{ background: "transparent" }}
+              >
+                <source src="/intro.webm" type="video/webm" />
+                <source src="/intro.mp4" type="video/mp4" />
+              </video>
+              {/* Edge-blend gradients — same approach as About section */}
+              <div
+                className="absolute inset-0 pointer-events-none z-20"
+                style={{
+                  background: `
+                    linear-gradient(to top, #030014 0%, transparent 20%),
+                    linear-gradient(to bottom, #030014 0%, transparent 20%),
+                    linear-gradient(to left, #030014 0%, transparent 15%),
+                    linear-gradient(to right, #030014 0%, transparent 15%)
+                  `,
+                }}
+              />
+            </div>
 
             {/* 
               Color-matching overlay: tints the video's pure black areas 
