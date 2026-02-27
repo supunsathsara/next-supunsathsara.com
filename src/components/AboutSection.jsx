@@ -128,17 +128,100 @@ const TAB_CONFIG = [
 const AboutSection = () => {
   const [tab, setTab] = useState("skills");
   const [isPending, startTransition] = useTransition();
+  const [isStopped, setIsStopped] = useState(false);
+  const [showCanvas, setShowCanvas] = useState(false);
   const videoRef = useRef(null);
+  const canvasRef = useRef(null);
+  const playCountRef = useRef(0);
+  const maxPlaysRef = useRef(1);
+  const isReplayRef = useRef(false);
+  const shouldStopNextRef = useRef(false);
 
   // Custom hooks
   const { age, isBirthday } = useAgeCalculation(BIRTH_DATE);
 
-  // Ensure video plays on mount
+  // Determine max plays: 2 if cinematic intro was shown, 1 otherwise
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {});
-    }
+    const introShown = sessionStorage.getItem("intro-shown");
+    maxPlaysRef.current = introShown ? 2 : 1;
   }, []);
+
+  // Capture the current video frame to the canvas
+  const captureFrame = useCallback(() => {
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+    if (!video || !canvas) return;
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+  }, []);
+
+  // Play video on mount & handle ended/timeupdate events
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.play().catch(() => {});
+
+    // Capture frames near the end so we have the last frame ready
+    const handleTimeUpdate = () => {
+      if (!video.duration) return;
+      const remaining = video.duration - video.currentTime;
+      if (remaining < 0.5 && shouldStopNextRef.current) {
+        captureFrame();
+      }
+    };
+
+    const handleEnded = () => {
+      playCountRef.current += 1;
+
+      const willStop =
+        isReplayRef.current ||
+        playCountRef.current >= maxPlaysRef.current;
+
+      if (willStop) {
+        // Capture final frame, crossfade to canvas
+        captureFrame();
+        setShowCanvas(true);
+        isReplayRef.current = false;
+        shouldStopNextRef.current = false;
+        // Let the CSS transition complete, then mark as stopped
+        setTimeout(() => setIsStopped(true), 800);
+      } else {
+        // Determine if the NEXT play will be the last
+        if (playCountRef.current + 1 >= maxPlaysRef.current || isReplayRef.current) {
+          shouldStopNextRef.current = true;
+        }
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      }
+    };
+
+    // Pre-flag if first play is the last
+    if (maxPlaysRef.current <= 1) {
+      shouldStopNextRef.current = true;
+    }
+
+    video.addEventListener("ended", handleEnded);
+    video.addEventListener("timeupdate", handleTimeUpdate);
+    return () => {
+      video.removeEventListener("ended", handleEnded);
+      video.removeEventListener("timeupdate", handleTimeUpdate);
+    };
+  }, [captureFrame]);
+
+  // Hover to replay (desktop) / Tap to replay (mobile)
+  const handleReplay = useCallback(() => {
+    const video = videoRef.current;
+    if (!video || !isStopped) return;
+    isReplayRef.current = true;
+    shouldStopNextRef.current = true;
+    setIsStopped(false);
+    setShowCanvas(false);
+    video.currentTime = 0;
+    video.play().catch(() => {});
+  }, [isStopped]);
 
   const handleTabChange = useCallback(
     (id) => {
@@ -166,21 +249,32 @@ const AboutSection = () => {
           className="relative z-10 flex items-center justify-center"
         >
           {/* Video container with edge-blending gradients */}
-          <div className="relative w-full max-w-[500px] aspect-[9/16] overflow-hidden">
+          <div
+            className="relative w-full max-w-[500px] aspect-[9/16] overflow-hidden"
+            onMouseEnter={handleReplay}
+            onClick={handleReplay}
+          >
             <video
               ref={videoRef}
-              autoPlay
-              loop
               muted
               playsInline
               preload="auto"
               poster="/images/intro-poster.jpg"
-              className="w-full h-full object-cover"
-              style={{ background: "#030014" }}
+              className="w-full h-full object-cover transition-opacity duration-700 ease-out"
+              style={{
+                background: "#030014",
+                opacity: showCanvas ? 0 : 1,
+              }}
             >
               <source src="/intro.webm" type="video/webm" />
               <source src="/intro.mp4" type="video/mp4" />
             </video>
+            {/* Freeze-frame canvas for smooth crossfade */}
+            <canvas
+              ref={canvasRef}
+              className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out pointer-events-none"
+              style={{ opacity: showCanvas ? 1 : 0 }}
+            />
             {/* Edge-blend gradients to dissolve video into background */}
             <div
               className="absolute inset-0 pointer-events-none"
