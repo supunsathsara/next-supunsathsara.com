@@ -263,8 +263,8 @@ const CinematicIntro = ({ onComplete }) => {
                       WebkitTextFillColor: "transparent",
                       backgroundClip: "text",
                     }}
-                    initial={{ letterSpacing: "0.5em", opacity: 0 }}
-                    animate={{ letterSpacing: "0.15em", opacity: 1 }}
+                    initial={{ letterSpacing: "0.3em", opacity: 0, scale: 0.95 }}
+                    animate={{ letterSpacing: "0.2em", opacity: 1, scale: 1 }}
                     transition={{ duration: 1.2, ease: "easeOut" }}
                   >
                     SUPUN SATHSARA
