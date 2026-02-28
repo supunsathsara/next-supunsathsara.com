@@ -18,7 +18,7 @@
     "autoprefixer": "10.4.15",
     "clsx": "^2.1.1",
     "date-fns": "^2.30.0",
-    "eslint": "8.47.0",
+    "eslint": "9.26.0",
     "eslint-config-next": "^14.2.18",
     "framer-motion": "^10.18.0",
     "motion": "^12.19.2",
