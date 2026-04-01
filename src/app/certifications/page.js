@@ -1,5 +1,5 @@
 import CertificateItem from "@/components/CertificateItem";
-import GradualSpacing from "@/components/ui/GradualSpacing";
+import { GradualSpacing } from "@/components/ui/GradualSpacing";
 import { TracingBeam } from "@/components/ui/tracing-beam";
 import certificates from "@/constants/certificates";
 

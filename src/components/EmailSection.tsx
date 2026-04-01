@@ -17,7 +17,7 @@ const EmailSection = () => {
   const [emailError, setEmailError] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [status, setStatus] = useState("");
-  const captchaRef = useRef();
+  const captchaRef = useRef<any>(null);
 
   useEffect(() => {
     (async function () {
@@ -31,19 +31,21 @@ const EmailSection = () => {
     })();
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSending(true);
     setEmailError(false);
     setEmailSubmitted(false);
 
+    const form = e.target as HTMLFormElement;
+
     // Get form data
     const data = {
-      name: e.target.name.value,
-      email: e.target.email.value,
-      subject: e.target.subject.value,
-      message: e.target.message.value,
-      token: e.target["cf-turnstile-response"].value,
+      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      subject: (form.elements.namedItem("subject") as HTMLInputElement).value,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+      token: (form.elements.namedItem("cf-turnstile-response") as HTMLInputElement).value,
     };
 
     // Define the endpoint
@@ -96,7 +98,7 @@ const EmailSection = () => {
       setStatus("");
       captchaRef.current?.reset();
       // Reset the form
-      e.target.reset();
+      form.reset();
     }
   };
 

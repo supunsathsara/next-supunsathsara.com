@@ -130,8 +130,8 @@ const AboutSection = () => {
   const [isPending, startTransition] = useTransition();
   const [isStopped, setIsStopped] = useState(false);
   const [showCanvas, setShowCanvas] = useState(false);
-  const videoRef = useRef(null);
-  const canvasRef = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const playCountRef = useRef(0);
   const maxPlaysRef = useRef(1);
   const isReplayRef = useRef(false);
@@ -224,7 +224,7 @@ const AboutSection = () => {
   }, [isStopped]);
 
   const handleTabChange = useCallback(
-    (id) => {
+    (id: string) => {
       startTransition(() => {
         setTab(id);
       });

@@ -3,7 +3,17 @@
 import { cn } from "@/utils/cn";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 
-export default function GradualSpacing({
+
+
+interface GradualSpacingProps {
+  text: string;
+  duration?: number;
+  delayMultiple?: number;
+  framerProps?: Variants;
+  className?: string;
+}
+
+function GradualSpacing({
   text,
   duration = 0.5,
   delayMultiple = 0.04,
@@ -12,7 +22,7 @@ export default function GradualSpacing({
     visible: { opacity: 1, x: 0 },
   },
   className,
-}) {
+}: GradualSpacingProps) {
   return (
     <div className="flex justify-center space-x-1">
       <AnimatePresence>
@@ -33,3 +43,5 @@ export default function GradualSpacing({
     </div>
   );
 }
+
+export { GradualSpacing };
