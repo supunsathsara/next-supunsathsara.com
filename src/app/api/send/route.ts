@@ -15,11 +15,11 @@ const schema = z.object({
   token: z.string().min(3),
 });
 
-export async function POST(req, res) {
+export async function POST(req: Request) {
 
   const body = await req.json();
   const { name, email, subject, message, token } = body;
-  if (!name || !email || !subject || !message, !token) {
+  if (!name || !email || !subject || !message || !token) {
     //send status 400
     return NextResponse.json({ success: false, message: "Invalid Request" }, { status: 400, headers: getCorsHeaders(req.headers.get("Origin") || req.headers.get("origin") || "") });
   }
@@ -137,12 +137,12 @@ export async function POST(req, res) {
 
 }
 
-export async function GET(req, res) {
+export async function GET(req: Request) {
   console.log(req.headers)
   return NextResponse.json({ success: false, message: "Invalid Request" }, { status: 400, headers: getCorsHeaders(req.headers.get("Origin") || req.headers.get("origin") || "") });
 }
 
-export const OPTIONS = async (request) => {
+export const OPTIONS = async (request: Request) => {
   // Return Response
   return NextResponse.json(
     {},

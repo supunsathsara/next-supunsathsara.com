@@ -2,7 +2,11 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const CinematicIntro = ({ onComplete }) => {
+interface CinematicIntroProps {
+  onComplete?: () => void;
+}
+
+const CinematicIntro = ({ onComplete }: CinematicIntroProps) => {
   const [phase, setPhase] = useState("loading"); // "loading" | "playing" | "text" | "exit" | "done"
   const videoRef = useRef(null);
   const backdropRef = useRef(null);
