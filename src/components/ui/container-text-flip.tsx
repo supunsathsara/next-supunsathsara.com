@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useId } from "react";
-
+import PropTypes from "prop-types";
 import { motion } from "framer-motion";
 import { cn } from "@/utils/cn";
 
@@ -98,3 +98,10 @@ export function ContainerTextFlip({
         </motion.span>
     );
 }
+ContainerTextFlip.propTypes = {
+  words: PropTypes.arrayOf(PropTypes.string),
+  interval: PropTypes.number,
+  className: PropTypes.string,
+  textClassName: PropTypes.string,
+  animationDuration: PropTypes.number,
+};

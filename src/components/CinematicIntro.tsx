@@ -1,5 +1,6 @@
 "use client";
 import { useState, useRef, useEffect, useCallback } from "react";
+import PropTypes from "prop-types";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface CinematicIntroProps {
@@ -14,7 +15,7 @@ const CinematicIntro = ({ onComplete }: CinematicIntroProps) => {
 
   // Skip intro if already shown this session (prevents replay on navigation)
   useEffect(() => {
-    if (typeof window !== "undefined" && sessionStorage.getItem("intro-shown")) {
+    if (globalThis.window !== undefined && sessionStorage.getItem("intro-shown")) {
       setPhase("done");
       onComplete?.();
     }
@@ -114,9 +115,10 @@ const CinematicIntro = ({ onComplete }: CinematicIntroProps) => {
   return (
     <AnimatePresence>
       {phase !== "done" && (
-        <motion.div
-          className="fixed inset-0 z-[9999] flex items-center justify-center cursor-pointer"
-          style={{ background: "#030014" }}
+        <motion.button
+          type="button"
+          className="fixed inset-0 z-[9999] flex items-center justify-center cursor-pointer w-full h-full bg-[#030014] border-0 p-0"
+          aria-label="Skip intro"
           onClick={handleSkip}
           initial={{ opacity: 1 }}
           animate={{
@@ -143,6 +145,7 @@ const CinematicIntro = ({ onComplete }: CinematicIntroProps) => {
               muted
               playsInline
               preload="auto"
+              tabIndex={-1}
               className="absolute inset-0 w-full h-full object-cover blur-[60px] scale-150 opacity-60"
               style={{ background: "transparent" }}
               aria-hidden="true"
@@ -295,10 +298,14 @@ const CinematicIntro = ({ onComplete }: CinematicIntroProps) => {
           >
             tap to skip
           </motion.p>
-        </motion.div>
+        </motion.button>
       )}
     </AnimatePresence>
   );
+};
+
+CinematicIntro.propTypes = {
+  onComplete: PropTypes.func,
 };
 
 export default CinematicIntro;

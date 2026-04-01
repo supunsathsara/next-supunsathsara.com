@@ -60,12 +60,12 @@ const EducationList = () => (
         <span>Diploma in Software Engineering</span>
       </div>
       <div className="text-sm text-gray-300">
-        Gold Medalist
+        Gold Medalist{" "}
         <span
           className="cursor-pointer"
           title="Recipient of the Gold Medal, awarded to the student with the highest academic achievement across all NIBM branches"
         >
-          <sup> ! </sup>
+          <sup>!</sup>
         </span>
         / Scholarship Holder{" "}
         <span
@@ -127,7 +127,7 @@ const TAB_CONFIG = [
 
 const AboutSection = () => {
   const [tab, setTab] = useState("skills");
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
   const [isStopped, setIsStopped] = useState(false);
   const [showCanvas, setShowCanvas] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -249,8 +249,10 @@ const AboutSection = () => {
           className="relative z-10 flex items-center justify-center"
         >
           {/* Video container with edge-blending gradients */}
-          <div
-            className="relative w-full max-w-[500px] aspect-[9/16] overflow-hidden"
+          <button
+            type="button"
+            className="relative w-full max-w-[500px] aspect-[9/16] overflow-hidden bg-transparent border-0 p-0 cursor-default"
+            aria-label="Replay intro animation"
             onMouseEnter={handleReplay}
             onClick={handleReplay}
           >
@@ -295,7 +297,7 @@ const AboutSection = () => {
                   "radial-gradient(ellipse at 50% 40%, rgba(88, 28, 135, 0.08) 0%, rgba(3, 0, 20, 0.15) 100%)",
               }}
             />
-          </div>
+          </button>
         </motion.div>
             <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
           <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
