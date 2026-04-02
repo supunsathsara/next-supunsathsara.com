@@ -9,14 +9,44 @@ import LinkedinIcon from "@public/linkedin-icon.svg";
 import XIcon from "@public/x-icon.svg";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useActionState } from "react";
 import { toast } from "react-hot-toast";
+import { sendEmailAction } from "@/app/actions/sendEmail";
 
 const EmailSection = () => {
-  const [emailSubmitted, setEmailSubmitted] = useState(false);
-  const [isSending, setIsSending] = useState(false);
   const [status, setStatus] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
   const captchaRef = useRef<any>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const [state, formAction, isPending] = useActionState(sendEmailAction, {
+    success: false,
+    message: "",
+  });
+
+  // Track the previous timestamp to avoid firing toast on mount
+  const prevTimestamp = useRef(state.timestamp);
+
+  useEffect(() => {
+    // Only fire when timestamp updates (real submission occurs)
+    if (state.timestamp && state.timestamp !== prevTimestamp.current) {
+      prevTimestamp.current = state.timestamp;
+      
+      if (state.success) {
+        toast.success(state.message || "Message sent!", {
+          style: { borderRadius: "10px", background: "#333", color: "#fff" },
+        });
+        setShowSuccess(true);
+      } else {
+        toast.error(state.message || "Something went wrong.", {
+          style: { borderRadius: "10px", background: "#333", color: "#fff" },
+        });
+        // Reset turnstile on error
+        captchaRef.current?.reset();
+        setStatus("");
+      }
+    }
+  }, [state]);
 
   useEffect(() => {
     (async function () {
@@ -29,66 +59,6 @@ const EmailSection = () => {
       });
     })();
   }, []);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (isSending) return;
-    setIsSending(true);
-
-    const form = e.target as HTMLFormElement;
-
-    const data = {
-      name: (form.elements.namedItem("name") as HTMLInputElement).value,
-      email: (form.elements.namedItem("email") as HTMLInputElement).value,
-      subject: (form.elements.namedItem("subject") as HTMLInputElement).value,
-      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
-      token: (form.elements.namedItem("cf-turnstile-response") as HTMLInputElement).value,
-    };
-
-    try {
-      const response = await fetch("/api/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        // Success — show persistent success card, don't reset captcha/form
-        setEmailSubmitted(true);
-        toast.success("Message sent! I'll be in touch soon.", {
-          style: {
-            borderRadius: "10px",
-            background: "#333",
-            color: "#fff",
-          },
-        });
-      } else {
-        const body = await response.json().catch(() => ({}));
-        toast.error(body?.message ?? "Something went wrong. Please try again.", {
-          style: {
-            borderRadius: "10px",
-            background: "#333",
-            color: "#fff",
-          },
-        });
-        // Only reset captcha on error so user can retry
-        captchaRef.current?.reset();
-        setStatus("");
-      }
-    } catch {
-      toast.error("Network error. Please check your connection.", {
-        style: {
-          borderRadius: "10px",
-          background: "#333",
-          color: "#fff",
-        },
-      });
-      captchaRef.current?.reset();
-      setStatus("");
-    } finally {
-      setIsSending(false);
-    }
-  };
 
   return (
     <section
@@ -173,9 +143,9 @@ const EmailSection = () => {
         </div>
       </div>
       <div className="z-5">
-        {emailSubmitted ? (
+        {showSuccess ? (
           <div className="flex flex-col items-center justify-center h-full text-center py-8 gap-4">
-            <div className="rounded-full bg-green-500/10 p-5 mb-2">
+             <div className="rounded-full bg-green-500/10 p-5 mb-2">
               <svg className="h-12 w-12 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -185,18 +155,19 @@ const EmailSection = () => {
               Thanks for reaching out. I&apos;ll get back to you as soon as possible.
             </p>
             <button
-              onClick={() => {
-                setEmailSubmitted(false);
-                setStatus("");
-                setTimeout(() => captchaRef.current?.reset(), 100);
-              }}
-              className="mt-2 text-sm text-primary-400 hover:text-primary-300 underline underline-offset-2 transition-colors"
-            >
-              Send another message
-            </button>
+               onClick={() => {
+                 setShowSuccess(false);
+                 setStatus("");
+                 setTimeout(() => captchaRef.current?.reset(), 100);
+                 formRef.current?.reset();
+               }}
+               className="mt-2 text-sm text-primary-400 hover:text-primary-300 underline underline-offset-2 transition-colors"
+             >
+               Send another message
+             </button>
           </div>
         ) : (
-        <form className="flex flex-col" onSubmit={handleSubmit}>
+        <form action={formAction} ref={formRef} className="flex flex-col">
           <div className="mb-6 md:grid md:grid-cols-2 gap-4">
             <div className="mb-6 md:mb-0">
               <label
@@ -211,6 +182,8 @@ const EmailSection = () => {
                 name="name"
                 autoComplete="name"
                 required
+                minLength={3}
+                maxLength={50}
                 className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:outline-hidden focus:ring-2 focus:ring-primary-500 transition-all"
                 placeholder="John Doe"
               />
@@ -244,6 +217,8 @@ const EmailSection = () => {
               id="subject"
               name="subject"
               required
+              minLength={3}
+              maxLength={50}
               className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:outline-hidden focus:ring-2 focus:ring-primary-500 transition-all"
               placeholder="Just saying hi"
             />
@@ -259,6 +234,8 @@ const EmailSection = () => {
               name="message"
               id="message"
               required
+              minLength={3}
+              maxLength={1000}
               rows={4}
               className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:outline-hidden focus:ring-2 focus:ring-primary-500 transition-all resize-none"
               placeholder="Let's talk about..."
@@ -279,37 +256,41 @@ const EmailSection = () => {
           <button
             type="submit"
             className="relative flex items-center justify-center gap-2 bg-primary-700 hover:bg-primary-800 disabled:opacity-60 disabled:cursor-not-allowed text-white font-medium py-2.5 px-5 rounded-lg w-full transition-all duration-200"
-            disabled={isSending || status !== "solved"}
+            disabled={isPending || status !== "solved"}
           >
-            {isSending ? (
-              <>
-                <svg
-                  className="animate-spin h-4 w-4 text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  />
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  />
-                </svg>
-                Sending...
-              </>
-            ) : status !== "solved" ? (
-              "Verifying CAPTCHA..."
-            ) : (
-              "Send Message"
-            )}
+            {(() => {
+              if (isPending) {
+                return (
+                  <>
+                    <svg
+                      className="animate-spin h-4 w-4 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      />
+                    </svg>
+                    Sending...
+                  </>
+                );
+              }
+              if (status === "solved") {
+                return "Send Message";
+              }
+              return "Verifying CAPTCHA...";
+            })()}
           </button>
         </form>
         )}

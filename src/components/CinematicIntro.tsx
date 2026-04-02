@@ -9,13 +9,14 @@ interface CinematicIntroProps {
 const CinematicIntro = ({
   onComplete
 }: CinematicIntroProps) => {
-  // Initialize phase from sessionStorage synchronously — no effect needed
-  const [phase, setPhase] = useState<string>(() => {
-    if (globalThis.window !== undefined && sessionStorage.getItem("intro-shown")) {
-      return "done";
+  const [phase, setPhase] = useState<string>("loading");
+
+  // Fire onComplete callback if intro was already shown
+  useEffect(() => {
+    if (typeof globalThis !== "undefined" && sessionStorage.getItem("intro-shown")) {
+      setPhase("done");
     }
-    return "loading";
-  });
+  }, []);
   const videoRef = useRef(null);
   const backdropRef = useRef(null);
   const hasTriggeredExit = useRef(false);
