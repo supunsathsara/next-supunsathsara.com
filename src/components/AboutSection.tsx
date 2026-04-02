@@ -7,7 +7,7 @@ import React, {
   useMemo,
   useCallback,
 } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import TabButton from "./TabButton";
 import certificates from "@/constants/certificates";
 import { useAgeCalculation } from "@/hooks";
@@ -60,12 +60,12 @@ const EducationList = () => (
         <span>Diploma in Software Engineering</span>
       </div>
       <div className="text-sm text-gray-300">
-        Gold Medalist
+        Gold Medalist{" "}
         <span
           className="cursor-pointer"
           title="Recipient of the Gold Medal, awarded to the student with the highest academic achievement across all NIBM branches"
         >
-          <sup> ! </sup>
+          <sup>!</sup>
         </span>
         / Scholarship Holder{" "}
         <span
@@ -127,11 +127,11 @@ const TAB_CONFIG = [
 
 const AboutSection = () => {
   const [tab, setTab] = useState("skills");
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
   const [isStopped, setIsStopped] = useState(false);
   const [showCanvas, setShowCanvas] = useState(false);
-  const videoRef = useRef(null);
-  const canvasRef = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const playCountRef = useRef(0);
   const maxPlaysRef = useRef(1);
   const isReplayRef = useRef(false);
@@ -224,7 +224,7 @@ const AboutSection = () => {
   }, [isStopped]);
 
   const handleTabChange = useCallback(
-    (id) => {
+    (id: string) => {
       startTransition(() => {
         setTab(id);
       });
@@ -249,8 +249,10 @@ const AboutSection = () => {
           className="relative z-10 flex items-center justify-center"
         >
           {/* Video container with edge-blending gradients */}
-          <div
-            className="relative w-full max-w-[500px] aspect-[9/16] overflow-hidden"
+          <button
+            type="button"
+            className="relative w-full max-w-[500px] aspect-9/16 overflow-hidden bg-transparent border-0 p-0 cursor-default"
+            aria-label="Replay intro animation"
             onMouseEnter={handleReplay}
             onClick={handleReplay}
           >
@@ -295,7 +297,7 @@ const AboutSection = () => {
                   "radial-gradient(ellipse at 50% 40%, rgba(88, 28, 135, 0.08) 0%, rgba(3, 0, 20, 0.15) 100%)",
               }}
             />
-          </div>
+          </button>
         </motion.div>
             <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
           <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
@@ -312,12 +314,12 @@ const AboutSection = () => {
             Software Engineering undergraduate at NIBM Sri Lanka, I&apos;m a
             quick learner driven by a passion for web development.
             <br />I am an{" "}
-            <span className="font-bold hover:bg-primary-500 bg-white text-[#030014] rounded-sm px-1 transition-colors">
+            <span className="font-bold hover:bg-primary-500 bg-white text-[#030014] rounded-xs px-1 transition-colors">
               Associate Software Engineer
             </span>{" "}
             at Expernetic, where I develop and maintain web applications, APIs,
             and microservices. Additionally, I am involved as a{" "}
-            <span className="font-bold text-[#030014] bg-white hover:bg-[#FF6C37] hover:text-white rounded-sm px-1 transition-colors">
+            <span className="font-bold text-[#030014] bg-white hover:bg-[#FF6C37] hover:text-white rounded-xs px-1 transition-colors">
               Postman Student Leader
             </span>
             , where I lead and mentor in the Postman student community.

@@ -1,4 +1,12 @@
-const certificates = [
+export interface Certificate {
+    id: number;
+    name: string;
+    url: string;
+    provider: string;
+    image: string;
+}
+
+const certificates: Certificate[] = [
     {
         id: 1,
         name: 'Back End Development and APIs',
@@ -119,7 +127,7 @@ const certificates = [
         image: 'GitHub-Foundations.png',
     },
     {
-        id:18,
+        id: 18,
         name: 'NASA Open Science',
         url: 'https://www.credly.com/badges/31e7a45d-2929-4dee-879c-bbf0ff5342b4/public_url',
         provider: 'NASA',

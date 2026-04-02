@@ -9,15 +9,44 @@ import LinkedinIcon from "@public/linkedin-icon.svg";
 import XIcon from "@public/x-icon.svg";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useActionState } from "react";
 import { toast } from "react-hot-toast";
+import { sendEmailAction } from "@/app/actions/sendEmail";
 
 const EmailSection = () => {
-  const [emailSubmitted, setEmailSubmitted] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [isSending, setIsSending] = useState(false);
   const [status, setStatus] = useState("");
-  const captchaRef = useRef();
+  const [showSuccess, setShowSuccess] = useState(false);
+  const captchaRef = useRef<any>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const [state, formAction, isPending] = useActionState(sendEmailAction, {
+    success: false,
+    message: "",
+  });
+
+  // Track the previous timestamp to avoid firing toast on mount
+  const prevTimestamp = useRef(state.timestamp);
+
+  useEffect(() => {
+    // Only fire when timestamp updates (real submission occurs)
+    if (state.timestamp && state.timestamp !== prevTimestamp.current) {
+      prevTimestamp.current = state.timestamp;
+      
+      if (state.success) {
+        toast.success(state.message || "Message sent!", {
+          style: { borderRadius: "10px", background: "#333", color: "#fff" },
+        });
+        setShowSuccess(true);
+      } else {
+        toast.error(state.message || "Something went wrong.", {
+          style: { borderRadius: "10px", background: "#333", color: "#fff" },
+        });
+        // Reset turnstile on error
+        captchaRef.current?.reset();
+        setStatus("");
+      }
+    }
+  }, [state]);
 
   useEffect(() => {
     (async function () {
@@ -31,81 +60,12 @@ const EmailSection = () => {
     })();
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSending(true);
-    setEmailError(false);
-    setEmailSubmitted(false);
-
-    // Get form data
-    const data = {
-      name: e.target.name.value,
-      email: e.target.email.value,
-      subject: e.target.subject.value,
-      message: e.target.message.value,
-      token: e.target["cf-turnstile-response"].value,
-    };
-
-    // Define the endpoint
-    const endpoint = "/api/send";
-    // console.log(data)
-
-    try {
-      toast.dismiss();
-      toast.promise(
-        fetch(endpoint, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }).then((response) => {
-          if (response.status === 200) {
-            // Success
-            setEmailSubmitted(true);
-            setEmailError(false);
-            return response.json();
-          } else {
-            // Error
-            setEmailError(true);
-            setEmailSubmitted(false);
-            throw new Error("An error occurred. Please try again later.");
-          }
-        }),
-        {
-          loading: "Sending...",
-          success: "Email sent successfully!",
-          error: "An error occurred. Please try again later.",
-        },
-        {
-          style: {
-            minWidth: "250px",
-            borderRadius: "10px",
-            background: "#333",
-            color: "#fff",
-            fontSize: "18px",
-          },
-        }
-      );
-    } catch (error) {
-      console.error("An error occurred:", error);
-      setEmailError(true);
-      setEmailSubmitted(false);
-    } finally {
-      setIsSending(false);
-      setStatus("");
-      captchaRef.current?.reset();
-      // Reset the form
-      e.target.reset();
-    }
-  };
-
   return (
     <section
       id="contact"
       className="grid md:grid-cols-2 my-12 md:my-12 py-24 gap-4 relative"
     >
-      <div className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary-900 to-transparent rounded-full h-80 w-80 z-0 blur-lg absolute top-3/4 -left-4 transform -translate-x-[80%] md:-translate-x-1/2 -translate-1/2"></div>
+      <div className="bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-primary-900 to-transparent rounded-full h-80 w-80 z-0 blur-lg absolute top-3/4 -left-4 transform -translate-x-[80%] md:-translate-x-1/2 -translate-1/2"></div>
       <div className="z-5">
         <h2 className="text-xl font-bold text-white my-2">
           Let&apos;s Connect
@@ -130,7 +90,7 @@ const EmailSection = () => {
           data-cal-namespace="quick-chat"
           data-cal-link="supunsathsara/quick-chat"
           data-cal-config='{"layout":"month_view"}'
-          className="flex items-center justify-center px-12 py-2 ring-white text-white ring-1 my-8 animate-shimmer bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] bg-[#121212] hover:bg-slate-800 rounded-lg"
+          className="flex items-center justify-center px-12 py-2 ring-white text-white ring-1 my-8 animate-shimmer bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-size-[200%_100%] bg-[#121212] hover:bg-slate-800 rounded-lg"
         >
           <CalendarIcon className="h-5 w-5 mr-2" />
           <span>Let&apos;s Schedule a Call</span>
@@ -183,7 +143,31 @@ const EmailSection = () => {
         </div>
       </div>
       <div className="z-5">
-        <form className="flex flex-col" onSubmit={handleSubmit}>
+        {showSuccess ? (
+          <div className="flex flex-col items-center justify-center h-full text-center py-8 gap-4">
+             <div className="rounded-full bg-green-500/10 p-5 mb-2">
+              <svg className="h-12 w-12 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-bold text-white">Message Sent!</h3>
+            <p className="text-[#ADB7BE] max-w-xs">
+              Thanks for reaching out. I&apos;ll get back to you as soon as possible.
+            </p>
+            <button
+               onClick={() => {
+                 setShowSuccess(false);
+                 setStatus("");
+                 setTimeout(() => captchaRef.current?.reset(), 100);
+                 formRef.current?.reset();
+               }}
+               className="mt-2 text-sm text-primary-400 hover:text-primary-300 underline underline-offset-2 transition-colors"
+             >
+               Send another message
+             </button>
+          </div>
+        ) : (
+        <form action={formAction} ref={formRef} className="flex flex-col">
           <div className="mb-6 md:grid md:grid-cols-2 gap-4">
             <div className="mb-6 md:mb-0">
               <label
@@ -198,7 +182,9 @@ const EmailSection = () => {
                 name="name"
                 autoComplete="name"
                 required
-                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
+                minLength={3}
+                maxLength={50}
+                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:outline-hidden focus:ring-2 focus:ring-primary-500 transition-all"
                 placeholder="John Doe"
               />
             </div>
@@ -214,7 +200,7 @@ const EmailSection = () => {
                 name="email"
                 id="email"
                 required
-                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
+                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:outline-hidden focus:ring-2 focus:ring-primary-500 transition-all"
                 placeholder="jacob@google.com"
               />
             </div>
@@ -231,7 +217,9 @@ const EmailSection = () => {
               id="subject"
               name="subject"
               required
-              className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
+              minLength={3}
+              maxLength={50}
+              className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:outline-hidden focus:ring-2 focus:ring-primary-500 transition-all"
               placeholder="Just saying hi"
             />
           </div>
@@ -246,7 +234,10 @@ const EmailSection = () => {
               name="message"
               id="message"
               required
-              className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
+              minLength={3}
+              maxLength={1000}
+              rows={4}
+              className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:outline-hidden focus:ring-2 focus:ring-primary-500 transition-all resize-none"
               placeholder="Let's talk about..."
             />
           </div>
@@ -264,22 +255,45 @@ const EmailSection = () => {
 
           <button
             type="submit"
-            className="bg-primary-700 hover:bg-primary-800 disabled:bg-primary-900 text-white font-medium py-2.5 px-5 rounded-lg w-full"
-            disabled={isSending || status !== "solved"}
+            className="relative flex items-center justify-center gap-2 bg-primary-700 hover:bg-primary-800 disabled:opacity-60 disabled:cursor-not-allowed text-white font-medium py-2.5 px-5 rounded-lg w-full transition-all duration-200"
+            disabled={isPending || status !== "solved"}
           >
-            {isSending ? "Sending..." : "Send"}
+            {(() => {
+              if (isPending) {
+                return (
+                  <>
+                    <svg
+                      className="animate-spin h-4 w-4 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      />
+                    </svg>
+                    Sending...
+                  </>
+                );
+              }
+              if (status === "solved") {
+                return "Send Message";
+              }
+              return "Verifying CAPTCHA...";
+            })()}
           </button>
-          {emailSubmitted && (
-            <p className="text-green-400 text-sm md:text-base mt-2 z-5 mx-auto font-bold">
-              Email sent successfully!
-            </p>
-          )}
-          {emailError && (
-            <p className="text-red-400 text-sm md:text-base mt-2 z-5 mx-auto font-bold">
-              An error occurred. Please try again later.
-            </p>
-          )}
         </form>
+        )}
       </div>
     </section>
   );

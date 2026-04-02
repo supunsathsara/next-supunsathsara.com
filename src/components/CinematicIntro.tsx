@@ -1,20 +1,34 @@
 "use client";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 
-const CinematicIntro = ({ onComplete }) => {
-  const [phase, setPhase] = useState("loading"); // "loading" | "playing" | "text" | "exit" | "done"
+interface CinematicIntroProps {
+  onComplete?: () => void;
+}
+
+const CinematicIntro = ({
+  onComplete
+}: CinematicIntroProps) => {
+  const [phase, setPhase] = useState<string>("loading");
+
+  // Fire onComplete callback if intro was already shown
+  useEffect(() => {
+    if (typeof globalThis !== "undefined" && sessionStorage.getItem("intro-shown")) {
+      setPhase("done");
+    }
+  }, []);
   const videoRef = useRef(null);
   const backdropRef = useRef(null);
   const hasTriggeredExit = useRef(false);
 
-  // Skip intro if already shown this session (prevents replay on navigation)
+  // Fire onComplete callback if intro was already shown (phase initialized as "done")
   useEffect(() => {
-    if (typeof window !== "undefined" && sessionStorage.getItem("intro-shown")) {
-      setPhase("done");
+    if (phase === "done") {
       onComplete?.();
     }
-  }, [onComplete]);
+    // Only run once on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Lock scroll during intro
   useEffect(() => {
@@ -110,9 +124,10 @@ const CinematicIntro = ({ onComplete }) => {
   return (
     <AnimatePresence>
       {phase !== "done" && (
-        <motion.div
-          className="fixed inset-0 z-[9999] flex items-center justify-center cursor-pointer"
-          style={{ background: "#030014" }}
+        <motion.button
+          type="button"
+          className="fixed inset-0 z-9999 flex items-center justify-center cursor-pointer w-full h-full bg-[#030014] border-0 p-0"
+          aria-label="Skip intro"
           onClick={handleSkip}
           initial={{ opacity: 1 }}
           animate={{
@@ -139,6 +154,7 @@ const CinematicIntro = ({ onComplete }) => {
               muted
               playsInline
               preload="auto"
+              tabIndex={-1}
               className="absolute inset-0 w-full h-full object-cover blur-[60px] scale-150 opacity-60"
               style={{ background: "transparent" }}
               aria-hidden="true"
@@ -291,7 +307,7 @@ const CinematicIntro = ({ onComplete }) => {
           >
             tap to skip
           </motion.p>
-        </motion.div>
+        </motion.button>
       )}
     </AnimatePresence>
   );
