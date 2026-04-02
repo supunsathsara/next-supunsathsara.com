@@ -70,7 +70,7 @@ const AchievementsSection = () => {
               <h2 className="text-white text-4xl font-bold flex flex-row">
                 {achievement.prefix}
                 <AnimatedNumber
-                  number={parseInt(achievement.value)}
+                  number={Number.parseInt(achievement.value)}
                   duration={1000}
                 />
                 {achievement.postfix}

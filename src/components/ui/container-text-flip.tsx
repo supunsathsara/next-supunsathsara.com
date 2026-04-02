@@ -19,7 +19,7 @@ export interface ContainerTextFlipProps {
 }
 
 export function ContainerTextFlip({
-    words = ["better", "modern", "beautiful", "awesome"],
+    words,
     interval = 3000,
     className,
     textClassName,
@@ -99,9 +99,9 @@ export function ContainerTextFlip({
     );
 }
 ContainerTextFlip.propTypes = {
-  words: PropTypes.arrayOf(PropTypes.string),
-  interval: PropTypes.number,
-  className: PropTypes.string,
-  textClassName: PropTypes.string,
-  animationDuration: PropTypes.number,
+    words: PropTypes.arrayOf(PropTypes.string),
+    interval: PropTypes.number,
+    className: PropTypes.string,
+    textClassName: PropTypes.string,
+    animationDuration: PropTypes.number,
 };

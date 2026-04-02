@@ -32,9 +32,8 @@ const CertificateItem = ({ certificate, index }) => {
         />
 
         <div
-          className={`absolute inset-0 bg-black/50 flex items-end py-8 px-4 transition-opacity duration-300 ${
-            isHovered ? "opacity-100" : "opacity-0"
-          }`}
+          className={`absolute inset-0 bg-black/50 flex items-end py-8 px-4 transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-0"
+            }`}
         >
           <div className="text-xl md:text-2xl font-medium bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-200">
             {certificate.name}
@@ -79,12 +78,14 @@ const CertificateItem = ({ certificate, index }) => {
               className="object-contain"
             />
 
-            <div
-              className="absolute top-4 right-4 text-white text-2xl cursor-pointer"
+            <button
+              type="button"
+              className="absolute top-4 right-4 text-white text-2xl cursor-pointer bg-transparent border-0 p-0 leading-none"
+              aria-label="Close full screen"
               onClick={() => setIsFullScreen(false)}
             >
               &times;
-            </div>
+            </button>
           </motion.div>
           <div className="w-full text-white text-lg text-center pt-4 bg-black bg-opacity-75 p-4">
             <p>{certificate.provider}</p>
