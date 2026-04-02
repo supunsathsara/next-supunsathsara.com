@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import Link from "next/link";
 import { ContainerTextFlip } from "./ui/container-text-flip";
 
@@ -15,7 +15,7 @@ const HeroSection = () => {
           className="lg:col-span-8 order-2 lg:order-1 text-center lg:text-left"
         >
           <h1 className="text-white mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight font-extrabold">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-secondary-600">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-primary-500 to-secondary-600">
               Hello, I&apos;m{" "}
             </span>
             <br></br>
@@ -40,7 +40,7 @@ const HeroSection = () => {
           <div className="flex flex-col sm:flex-row gap-4 items-center lg:items-start">
             <Link
               href="#contact"
-              className="px-6 py-3 w-full sm:w-auto rounded-full bg-gradient-to-br from-primary-500 to-secondary hover:bg-slate-500 text-white text-center font-medium transition-all"
+              className="px-6 py-3 w-full sm:w-auto rounded-full bg-linear-to-br from-primary-500 to-secondary hover:bg-slate-500 text-white text-center font-medium transition-all"
             >
               Hire Me
             </Link>
@@ -48,9 +48,9 @@ const HeroSection = () => {
               href="/Supun-Sathsara-CV.pdf"
               download="Supun Sathsara CV.pdf"
               title="Download My CV"
-              className="px-1 py-1 w-full sm:w-auto rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-800 text-white transition-all"
+              className="px-1 py-1 w-full sm:w-auto rounded-full bg-linear-to-br from-primary-500 to-secondary-500 hover:bg-slate-800 text-white transition-all"
             >
-              <span className="block animate-shimmer bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] bg-[#121212] hover:bg-slate-800 rounded-full px-5 py-2 text-center font-medium">
+              <span className="block animate-shimmer bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-size-[200%_100%] bg-[#121212] hover:bg-slate-800 rounded-full px-5 py-2 text-center font-medium">
                 Download CV
               </span>
             </a>

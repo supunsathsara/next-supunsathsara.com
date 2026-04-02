@@ -3,7 +3,7 @@
 import { ArrowsPointingOutIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 const CertificateItem = ({ certificate, index }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -35,7 +35,7 @@ const CertificateItem = ({ certificate, index }) => {
           className={`absolute inset-0 bg-black/50 flex items-end py-8 px-4 transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-0"
             }`}
         >
-          <div className="text-xl md:text-2xl font-medium bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-200">
+          <div className="text-xl md:text-2xl font-medium bg-clip-text text-transparent bg-linear-to-b from-neutral-50 to-neutral-200">
             {certificate.name}
           </div>
         </div>

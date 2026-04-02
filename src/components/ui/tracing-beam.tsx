@@ -4,9 +4,8 @@ import {
   motion,
   useTransform,
   useScroll,
-  useVelocity,
   useSpring,
-} from "framer-motion";
+} from "motion/react";
 import { cn } from "@/utils/cn";
 
 export const TracingBeam = ({
@@ -50,6 +49,7 @@ export const TracingBeam = ({
     <motion.div
       ref={ref}
       className={cn("relative mx-auto h-full w-full max-w-4xl", className)}
+      style={{ position: "relative" }}
     >
       <div className="absolute top-3 -left-4 md:-left-20">
         <motion.div
@@ -63,7 +63,7 @@ export const TracingBeam = ({
                 ? "none"
                 : "rgba(0, 0, 0, 0.24) 0px 3px 8px",
           }}
-          className="border-netural-200 ml-[27px] flex h-4 w-4 items-center justify-center rounded-full border shadow-sm"
+          className="border-netural-200 ml-[27px] flex h-4 w-4 items-center justify-center rounded-full border shadow-xs"
         >
           <motion.div
             transition={{
@@ -71,8 +71,8 @@ export const TracingBeam = ({
               delay: 0.5,
             }}
             animate={{
-              backgroundColor: scrollYProgress.get() > 0 ? "white" : "#10b981",
-              borderColor: scrollYProgress.get() > 0 ? "white" : "#059669",
+              backgroundColor: scrollYProgress.get() > 0 ? "#ffffff" : "#10b981",
+              borderColor: scrollYProgress.get() > 0 ? "#ffffff" : "#059669",
             }}
             className="h-2 w-2 rounded-full border border-neutral-300 bg-white"
           />

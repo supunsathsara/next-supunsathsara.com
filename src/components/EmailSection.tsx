@@ -95,7 +95,7 @@ const EmailSection = () => {
       id="contact"
       className="grid md:grid-cols-2 my-12 md:my-12 py-24 gap-4 relative"
     >
-      <div className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary-900 to-transparent rounded-full h-80 w-80 z-0 blur-lg absolute top-3/4 -left-4 transform -translate-x-[80%] md:-translate-x-1/2 -translate-1/2"></div>
+      <div className="bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-primary-900 to-transparent rounded-full h-80 w-80 z-0 blur-lg absolute top-3/4 -left-4 transform -translate-x-[80%] md:-translate-x-1/2 -translate-1/2"></div>
       <div className="z-5">
         <h2 className="text-xl font-bold text-white my-2">
           Let&apos;s Connect
@@ -120,7 +120,7 @@ const EmailSection = () => {
           data-cal-namespace="quick-chat"
           data-cal-link="supunsathsara/quick-chat"
           data-cal-config='{"layout":"month_view"}'
-          className="flex items-center justify-center px-12 py-2 ring-white text-white ring-1 my-8 animate-shimmer bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] bg-[#121212] hover:bg-slate-800 rounded-lg"
+          className="flex items-center justify-center px-12 py-2 ring-white text-white ring-1 my-8 animate-shimmer bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-size-[200%_100%] bg-[#121212] hover:bg-slate-800 rounded-lg"
         >
           <CalendarIcon className="h-5 w-5 mr-2" />
           <span>Let&apos;s Schedule a Call</span>
@@ -211,7 +211,7 @@ const EmailSection = () => {
                 name="name"
                 autoComplete="name"
                 required
-                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all"
+                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:outline-hidden focus:ring-2 focus:ring-primary-500 transition-all"
                 placeholder="John Doe"
               />
             </div>
@@ -227,7 +227,7 @@ const EmailSection = () => {
                 name="email"
                 id="email"
                 required
-                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all"
+                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:outline-hidden focus:ring-2 focus:ring-primary-500 transition-all"
                 placeholder="jacob@google.com"
               />
             </div>
@@ -244,7 +244,7 @@ const EmailSection = () => {
               id="subject"
               name="subject"
               required
-              className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all"
+              className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:outline-hidden focus:ring-2 focus:ring-primary-500 transition-all"
               placeholder="Just saying hi"
             />
           </div>
@@ -260,7 +260,7 @@ const EmailSection = () => {
               id="message"
               required
               rows={4}
-              className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all resize-none"
+              className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:outline-hidden focus:ring-2 focus:ring-primary-500 transition-all resize-none"
               placeholder="Let's talk about..."
             />
           </div>

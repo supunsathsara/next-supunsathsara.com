@@ -7,7 +7,7 @@ import React, {
   useMemo,
   useCallback,
 } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import TabButton from "./TabButton";
 import certificates from "@/constants/certificates";
 import { useAgeCalculation } from "@/hooks";
@@ -251,7 +251,7 @@ const AboutSection = () => {
           {/* Video container with edge-blending gradients */}
           <button
             type="button"
-            className="relative w-full max-w-[500px] aspect-[9/16] overflow-hidden bg-transparent border-0 p-0 cursor-default"
+            className="relative w-full max-w-[500px] aspect-9/16 overflow-hidden bg-transparent border-0 p-0 cursor-default"
             aria-label="Replay intro animation"
             onMouseEnter={handleReplay}
             onClick={handleReplay}
@@ -314,12 +314,12 @@ const AboutSection = () => {
             Software Engineering undergraduate at NIBM Sri Lanka, I&apos;m a
             quick learner driven by a passion for web development.
             <br />I am an{" "}
-            <span className="font-bold hover:bg-primary-500 bg-white text-[#030014] rounded-sm px-1 transition-colors">
+            <span className="font-bold hover:bg-primary-500 bg-white text-[#030014] rounded-xs px-1 transition-colors">
               Associate Software Engineer
             </span>{" "}
             at Expernetic, where I develop and maintain web applications, APIs,
             and microservices. Additionally, I am involved as a{" "}
-            <span className="font-bold text-[#030014] bg-white hover:bg-[#FF6C37] hover:text-white rounded-sm px-1 transition-colors">
+            <span className="font-bold text-[#030014] bg-white hover:bg-[#FF6C37] hover:text-white rounded-xs px-1 transition-colors">
               Postman Student Leader
             </span>
             , where I lead and mentor in the Postman student community.

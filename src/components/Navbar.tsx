@@ -38,31 +38,31 @@ const Navbar = () => {
           href={"/"}
           className="text-2xl md:text-3xl text-white font-semibold"
         >
-          <Image src={TypoLogo} alt="Supun Sathsara Logo" width={80} quality={100} priority className="mx-2 overflow-clip" />
+          <Image src={TypoLogo} alt="Supun Sathsara Logo" width={80} quality={100} priority className="mx-2 overflow-clip" style={{ height: "auto" }} />
         </Link>
         <div className="mobile-menu block md:hidden">
-          {!navbarOpen ? (
-            <button
-              onClick={() => setNavbarOpen(true)}
-              aria-label="Menu Toggle"
-              className="flex items-center px-3 py-2 border rounded border-slate-200 text-slate-200 hover:text-white hover:border-white"
-            >
-              <Bars3Icon className="h-5 w-5" />
-            </button>
-          ) : (
+          {navbarOpen ? (
             <button
               onClick={() => setNavbarOpen(false)}
               aria-label="Menu Toggle"
-              className="flex items-center px-3 py-2 border rounded border-slate-200 text-slate-200 hover:text-white hover:border-white"
+              className="flex items-center px-3 py-2 border rounded-sm border-slate-200 text-slate-200 hover:text-white hover:border-white"
             >
               <XMarkIcon className="h-5 w-5" />
             </button>
+          ) : (
+            <button
+              onClick={() => setNavbarOpen(true)}
+              aria-label="Menu Toggle"
+              className="flex items-center px-3 py-2 border rounded-sm border-slate-200 text-slate-200 hover:text-white hover:border-white"
+            >
+              <Bars3Icon className="h-5 w-5" />
+            </button>
           )}
         </div>
-        <div className="menu hidden md:block md:w-auto md:border md:border-[#7042f861] md:bg-[#0300145e] rounded md:rounded-full" id="navbar">
+        <div className="menu hidden md:block md:w-auto md:border md:border-[#7042f861] md:bg-[#0300145e] rounded-sm md:rounded-full" id="navbar">
           <ul className="flex p-4 md:p-0 md:flex-row md:space-x-8 mt-0">
-            {navLinks.map((link, index) => (
-              <li key={index}>
+            {navLinks.map((link) => (
+              <li key={link.path}>
                 <NavLink href={link.path} title={link.title} />
               </li>
             ))}

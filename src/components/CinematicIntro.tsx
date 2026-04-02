@@ -1,25 +1,33 @@
 "use client";
 import { useState, useRef, useEffect, useCallback } from "react";
-import PropTypes from "prop-types";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 
 interface CinematicIntroProps {
   onComplete?: () => void;
 }
 
-const CinematicIntro = ({ onComplete }: CinematicIntroProps) => {
-  const [phase, setPhase] = useState("loading"); // "loading" | "playing" | "text" | "exit" | "done"
+const CinematicIntro = ({
+  onComplete
+}: CinematicIntroProps) => {
+  // Initialize phase from sessionStorage synchronously — no effect needed
+  const [phase, setPhase] = useState<string>(() => {
+    if (globalThis.window !== undefined && sessionStorage.getItem("intro-shown")) {
+      return "done";
+    }
+    return "loading";
+  });
   const videoRef = useRef(null);
   const backdropRef = useRef(null);
   const hasTriggeredExit = useRef(false);
 
-  // Skip intro if already shown this session (prevents replay on navigation)
+  // Fire onComplete callback if intro was already shown (phase initialized as "done")
   useEffect(() => {
-    if (globalThis.window !== undefined && sessionStorage.getItem("intro-shown")) {
-      setPhase("done");
+    if (phase === "done") {
       onComplete?.();
     }
-  }, [onComplete]);
+    // Only run once on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Lock scroll during intro
   useEffect(() => {
@@ -117,7 +125,7 @@ const CinematicIntro = ({ onComplete }: CinematicIntroProps) => {
       {phase !== "done" && (
         <motion.button
           type="button"
-          className="fixed inset-0 z-[9999] flex items-center justify-center cursor-pointer w-full h-full bg-[#030014] border-0 p-0"
+          className="fixed inset-0 z-9999 flex items-center justify-center cursor-pointer w-full h-full bg-[#030014] border-0 p-0"
           aria-label="Skip intro"
           onClick={handleSkip}
           initial={{ opacity: 1 }}
@@ -302,10 +310,6 @@ const CinematicIntro = ({ onComplete }: CinematicIntroProps) => {
       )}
     </AnimatePresence>
   );
-};
-
-CinematicIntro.propTypes = {
-  onComplete: PropTypes.func,
 };
 
 export default CinematicIntro;
