@@ -8,8 +8,7 @@ const schema = z.object({
   name: z.string()
     .min(3, "Name must be at least 3 characters.")
     .max(50, "Name must be 50 characters or less."),
-  email: z.string()
-    .email("Please provide a valid email address."),
+  email: z.email("Please provide a valid email address."),
   subject: z.string()
     .min(3, "Subject must be at least 3 characters.")
     .max(50, "Subject is too long (maximum 50 characters)."),
