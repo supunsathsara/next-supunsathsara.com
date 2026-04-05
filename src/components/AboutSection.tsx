@@ -354,7 +354,7 @@ const AboutSection = () => {
                   duration: 0.3,
                   ease: "easeInOut",
                 }}
-                className="absolute inset-0"
+                className="w-full"
               >
                 {activeTabContent}
               </motion.div>

@@ -171,8 +171,7 @@ export function CertificateLightbox({
       <button
         type="button"
         onClick={onClose}
-        aria-label="Close"
-        className="absolute top-4 right-4 md:top-6 md:right-6 z-10 flex items-center justify-center h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-colors"
+        className="absolute top-4 right-4 md:top-6 md:right-6 z-50 flex items-center justify-center h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-colors"
       >
         <XMarkIcon className="h-5 w-5" />
       </button>
@@ -182,8 +181,7 @@ export function CertificateLightbox({
         <button
           type="button"
           onClick={(e) => { e.stopPropagation(); onPrev(); }}
-          aria-label="Previous certificate"
-          className="absolute left-2 md:left-6 z-10 flex items-center justify-center h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-colors"
+          className="absolute left-1 md:left-6 z-50 flex items-center justify-center h-10 w-10 rounded-full bg-black/40 hover:bg-black/60 border border-white/20 text-white transition-colors backdrop-blur-md"
         >
           <ChevronLeftIcon className="h-5 w-5" />
         </button>
@@ -194,8 +192,7 @@ export function CertificateLightbox({
         <button
           type="button"
           onClick={(e) => { e.stopPropagation(); onNext(); }}
-          aria-label="Next certificate"
-          className="absolute right-2 md:right-20 z-10 flex items-center justify-center h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-colors"
+          className="absolute right-1 md:right-20 z-50 flex items-center justify-center h-10 w-10 rounded-full bg-black/40 hover:bg-black/60 border border-white/20 text-white transition-colors backdrop-blur-md"
         >
           <ChevronRightIcon className="h-5 w-5" />
         </button>
