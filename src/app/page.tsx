@@ -1,5 +1,7 @@
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
+import InsightsSection from "@/components/InsightsSection";
+import VisualBreakSection from "@/components/VisualBreakSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import EmailSection from "@/components/EmailSection";
 import AchievementsSection from "@/components/AchievementsSection";
@@ -16,10 +18,12 @@ export default function Home() {
       <div className="container mx-auto px-12 py-4">
         <AchievementsSection />
         <AboutSection />
+        <InsightsSection />
         <HolopinBoard />
         <YoutubePlayer />
         <GallerySection />
         <ProjectsSection />
+        <VisualBreakSection />
         <EmailSection />
       </div>
     </>

@@ -162,7 +162,7 @@ const AboutSection = () => {
     const video = videoRef.current;
     if (!video) return;
 
-    video.play().catch(() => {});
+    video.play().catch(() => { });
 
     // Capture frames near the end so we have the last frame ready
     const handleTimeUpdate = () => {
@@ -194,7 +194,7 @@ const AboutSection = () => {
           shouldStopNextRef.current = true;
         }
         video.currentTime = 0;
-        video.play().catch(() => {});
+        video.play().catch(() => { });
       }
     };
 
@@ -220,7 +220,7 @@ const AboutSection = () => {
     setIsStopped(false);
     setShowCanvas(false);
     video.currentTime = 0;
-    video.play().catch(() => {});
+    video.play().catch(() => { });
   }, [isStopped]);
 
   const handleTabChange = useCallback(
@@ -299,35 +299,43 @@ const AboutSection = () => {
             />
           </button>
         </motion.div>
-            <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
+        <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
           <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
-          <p className="text-base lg:text-lg text-justify">
-            As a {age}-year-old{" "}
-            {isBirthday && (
-              <span
-                className="animate-pulse"
-                title="it's my birthday today! 🥳"
-              >
-                🎂
-              </span>
-            )}{" "}
-            Software Engineering undergraduate at NIBM Sri Lanka, I&apos;m a
-            quick learner driven by a passion for web development.
-            <br />I am an{" "}
-            <span className="font-bold hover:bg-primary-500 bg-white text-[#030014] rounded-xs px-1 transition-colors">
-              Associate Software Engineer
-            </span>{" "}
-            at Expernetic, where I develop and maintain web applications, APIs,
-            and microservices. Additionally, I am involved as a{" "}
-            <span className="font-bold text-[#030014] bg-white hover:bg-[#FF6C37] hover:text-white rounded-xs px-1 transition-colors">
-              Postman Student Leader
-            </span>
-            , where I lead and mentor in the Postman student community.
-            <br />
-            With a strong foundation in web development, I bring responsive web
-            design to life. I am dedicated to crafting efficient solutions and
-            continuously innovating in the tech world.
-          </p>
+          <div className="flex flex-col gap-2 text-base lg:text-lg text-justify text-gray-300">
+            <p>
+              I am a {age}-year-old{" "}
+              {isBirthday && (
+                <span
+                  className="animate-pulse"
+                  title="it's my birthday today! 🥳"
+                >
+                  🎂
+                </span>
+              )}{" "}
+              <strong>Software Engineering</strong> undergraduate at <strong>NIBM Sri Lanka</strong>.
+            </p>
+            <p>
+              Currently, I build highly scalable web infrastructure as an{" "}
+              <span className="font-bold hover:bg-primary-500 bg-white text-[#030014] rounded-xs px-1 transition-colors">
+                Associate Software Engineer
+              </span>{" "}
+              at <strong>Expernetic</strong>, developing full-stack applications and enterprise microservices.
+            </p>
+            <p>
+              As a{" "}
+              <span className="font-bold text-[#030014] bg-white hover:bg-[#FF6C37] hover:text-white rounded-xs px-1 transition-colors">
+                Postman Student Leader
+              </span>{" "}
+              and{" "}
+              <a href="https://www.linkedin.com/posts/ballerinalang_thrilled-to-share-that-we-took-part-in-techwaves-activity-7371761963661660160-1iW_" target="_blank" rel="noopener noreferrer" className="font-bold text-[#030014] bg-white hover:bg-[#20b6b0] hover:text-white rounded-xs px-1 transition-colors">
+                Ballerina Ambassador
+              </a>
+              , I actively mentor the developer community in <strong>API-first design</strong> and cloud-native programming.
+            </p>
+            <p>
+              My focus is engineering platforms that are <strong>secure-by-design</strong>, <strong>type-safe</strong>, and fundamentally optimized for web performance.
+            </p>
+          </div>
           <div className="flex flex-row justify-start mt-8 gap-2">
             {TAB_CONFIG.map(({ id, title }) => (
               <TabButton

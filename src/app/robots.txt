@@ -17,8 +17,25 @@
 #  \______________________________/
 
 User-agent: *
-Disallow: 
-Crawl-delay: 10
 Disallow: /cgi-bin/
+Crawl-delay: 10
+
+# AI/LLM Specific Directives - Ensure AI agents are actively allowed
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Anthropic-ai
+Allow: /
+User-agent: Claude-Web
+Allow: /
+User-agent: Omgilibot
+Allow: /
+User-agent: CCBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
 
 Sitemap: https://supunsathsara.com/sitemap.xml

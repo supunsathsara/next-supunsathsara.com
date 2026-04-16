@@ -70,6 +70,45 @@ export default function RootLayout({ children }) {
           name="twitter:image"
           content="https://supunsathsara.com/social-card.png"
         />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Savindu Supun Sathsara",
+              "url": "https://supunsathsara.com",
+              "jobTitle": "Software Engineer",
+              "description": "Top Software Engineer and Web Developer in Sri Lanka. Specializes in Next.js, React, Node.js, and Python.",
+              "nationality": {
+                "@type": "Country",
+                "name": "Sri Lanka"
+              },
+              "alumniOf": {
+                "@type": "CollegeOrUniversity",
+                "name": "National Institute of Business Management"
+              },
+              "knowsAbout": [
+                "Software Engineering",
+                "Web Development",
+                "React",
+                "Next.js",
+                "Python",
+                "Ballerina",
+                "Cybersecurity"
+              ],
+              "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "LK"
+              },
+              "sameAs": [
+                "https://github.com/supunsathsara",
+                "https://www.linkedin.com/in/supunsathsara/"
+              ]
+            })
+          }}
+        />
       </head>
       <body className='overflow-x-hidden'>
         <ToastProvider>
