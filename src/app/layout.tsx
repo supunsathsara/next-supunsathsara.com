@@ -9,6 +9,7 @@ import './globals.css'
 
 
 export const metadata = {
+  metadataBase: new URL('https://supunsathsara.com'),
   title: 'Savindu Supun Sathsara',
   description: 'A Developer based in Sri Lanka, specializing in building exceptional websites, applications, and everything in between.',
 }

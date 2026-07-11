@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-const useRandomImage = (images: string[]): string => {
+const useRandomImage = (images: string[]): string | undefined => {
     const [currentImageIndex] = useState<number>(
-        () => Math.floor(Math.random() * images.length)
+        () => images.length > 0 ? Math.floor(Math.random() * images.length) : -1
     );
 
-    return images[currentImageIndex];
+    return currentImageIndex >= 0 ? images[currentImageIndex] : undefined;
 };
 
 export default useRandomImage;

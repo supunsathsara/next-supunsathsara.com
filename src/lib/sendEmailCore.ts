@@ -10,6 +10,16 @@ function getResend() {
   return new Resend(key);
 }
 
+/** Escape HTML special characters to prevent injection in email templates. */
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#x27;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
 const schema = z.object({
   name: z.string()
     .min(3, "Name must be at least 3 characters.")
@@ -54,16 +64,16 @@ export async function processEmail(data: Partial<SendEmailInput>): Promise<SendE
         from: "Portfolio Contact <no-reply@supunsathsara.com>",
         to: "contact@supunsathsara.com",
         replyTo: email,
-        subject: `[Portfolio] ${subject} — from ${name}`,
+        subject: `[Portfolio] ${escapeHtml(subject)} — from ${escapeHtml(name)}`,
         html: `
           <div style="font-family:Arial,sans-serif;background:#f5f5f5;padding:20px;border-radius:8px;">
             <h2 style="color:#333;margin-bottom:8px;">New message from your portfolio</h2>
             <div style="background:#fff;padding:16px;border-radius:8px;border-left:4px solid #7c3aed;">
-              <p style="margin:0 0 8px;"><strong>Name:</strong> ${name}</p>
+              <p style="margin:0 0 8px;"><strong>Name:</strong> ${escapeHtml(name)}</p>
               <p style="margin:0 0 8px;"><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-              <p style="margin:0 0 8px;"><strong>Subject:</strong> ${subject}</p>
+              <p style="margin:0 0 8px;"><strong>Subject:</strong> ${escapeHtml(subject)}</p>
               <hr style="border:none;border-top:1px solid #eee;margin:12px 0;" />
-              <p style="white-space:pre-wrap;color:#444;">${message}</p>
+              <p style="white-space:pre-wrap;color:#444;">${escapeHtml(message)}</p>
             </div>
           </div>
         `,
@@ -71,7 +81,7 @@ export async function processEmail(data: Partial<SendEmailInput>): Promise<SendE
       // Auto-reply to sender
       {
         from: "Supun Sathsara <no-reply@supunsathsara.com>",
-        to: `${name} <${email}>`,
+        to: `${escapeHtml(name)} <${email}>`,
         replyTo: "contact@supunsathsara.com",
         subject: "Thanks for reaching out! 👋",
         html: `
@@ -85,7 +95,7 @@ export async function processEmail(data: Partial<SendEmailInput>): Promise<SendE
           <body style="margin:0;padding:0;font-family:Arial,sans-serif;background:#f5f5f5;">
             <div style="max-width:600px;margin:32px auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
               <div style="background:linear-gradient(135deg,#7c3aed,#06b6d4);padding:32px 24px;text-align:center;">
-                 <h1 style="color:#fff;margin:0;font-size:24px;">Hey ${name}! 👋</h1>
+                 <h1 style="color:#fff;margin:0;font-size:24px;">Hey ${escapeHtml(name)}! 👋</h1>
                  <p style="color:rgba(255,255,255,0.85);margin:8px 0 0;">Thanks for getting in touch.</p>
               </div>
               <div style="padding:32px 24px;">
@@ -94,7 +104,7 @@ export async function processEmail(data: Partial<SendEmailInput>): Promise<SendE
                 </p>
                 <div style="background:#f9f5ff;border-left:4px solid #7c3aed;border-radius:4px;padding:16px;margin-bottom:24px;">
                   <p style="margin:0;font-weight:bold;color:#333;">Your message:</p>
-                  <p style="margin:8px 0 0;color:#555;white-space:pre-wrap;">${message}</p>
+                  <p style="margin:8px 0 0;color:#555;white-space:pre-wrap;">${escapeHtml(message)}</p>
                 </div>
                 <p style="color:#666;font-size:14px;margin:0;">
                   In the meantime, feel free to connect with me on 

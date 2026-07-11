@@ -1,11 +1,36 @@
 import { processEmail } from "@/lib/sendEmailCore";
 import getCorsHeaders from "@/lib/getCorsHeaders";
+import { rateLimit } from "@/lib/rateLimit";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   const corsHeaders = getCorsHeaders(
     req.headers.get("Origin") || req.headers.get("origin") || ""
   );
+
+  // Rate limiting by IP address.
+  // Vercel sets x-real-ip to the client's real IP on every request — this is
+  // the most reliable single-value header. x-forwarded-for may contain
+  // multiple chained IPs; we take the first if x-real-ip is absent.
+  const ip =
+    req.headers.get("x-real-ip") ||
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    "unknown";
+  const { allowed, remaining } = rateLimit(ip);
+
+  if (!allowed) {
+    return NextResponse.json(
+      { success: false, message: "Too many requests. Please try again later." },
+      {
+        status: 429,
+        headers: {
+          ...corsHeaders,
+          "Retry-After": "60",
+          "X-RateLimit-Remaining": String(remaining),
+        },
+      }
+    );
+  }
 
   let body;
   try {
