@@ -44,5 +44,6 @@
     "react-intersection-observer": "^10.0.3",
     "three": "^0.183.2",
     "typescript": "^6.0.2"
-  }
+  },
+  "packageManager": "pnpm@11.11.0"
 }
