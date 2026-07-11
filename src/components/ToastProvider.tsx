@@ -4,7 +4,7 @@ import React from "react";
 import { Toaster } from 'react-hot-toast';
 
 
-const ToastProvider = ({ children }: { children: React.ReactNode }) => {
+const ToastProvider = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
     <>
       <Toaster position='top-center' reverseOrder={false} />
