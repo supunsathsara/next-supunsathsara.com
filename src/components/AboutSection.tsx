@@ -154,6 +154,7 @@ const AboutSection = () => {
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     const ctx = canvas.getContext("2d");
+    if (!ctx) return;
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
   }, []);
 

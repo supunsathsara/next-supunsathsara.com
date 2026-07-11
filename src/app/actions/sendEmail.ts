@@ -1,14 +1,7 @@
 "use server";
 
 import { processEmail, SendEmailInput, SendEmailResponse } from "@/lib/sendEmailCore";
-
-// ActionState tracks the outcome of the action for useActionState hook.
-export type ActionState = {
-  success: boolean;
-  message: string;
-  // Expose timestamp to easily trigger effect dependencies on multiple submissions
-  timestamp?: number;
-};
+import type { ActionState } from "@/types/email";
 
 export async function sendEmailAction(
   prevState: ActionState,

@@ -17,8 +17,8 @@ const CinematicIntro = ({
       setPhase("done");
     }
   }, []);
-  const videoRef = useRef(null);
-  const backdropRef = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const backdropRef = useRef<HTMLVideoElement>(null);
   const hasTriggeredExit = useRef(false);
 
   // Fire onComplete callback if intro was already shown (phase initialized as "done")

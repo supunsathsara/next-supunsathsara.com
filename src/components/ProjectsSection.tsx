@@ -3,8 +3,9 @@ import React, { useState, useRef } from "react";
 import ProjectCard from "./ProjectCard";
 import ProjectTag from "./ProjectTag";
 import { motion, useInView } from "motion/react";
+import type { Project } from "@/types/project";
 
-const projectsData = [
+const projectsData: Project[] = [
   {
     id: 1,
     title: "NotifIBM",

@@ -1,3 +1,4 @@
+import React from 'react'
 import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
 import StarsCanvas from '@/components/StarBackground'
@@ -16,7 +17,7 @@ export const viewport = {
   themeColor: '#030014',
 }
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <head>

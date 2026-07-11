@@ -2,7 +2,13 @@ import { Resend } from "resend";
 import { z } from "zod";
 import TurnstileVerify from "@/lib/TurnstileVerify";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) {
+    throw new Error("Missing API key. Pass it to the constructor `new Resend(\"re_123\")`");
+  }
+  return new Resend(key);
+}
 
 const schema = z.object({
   name: z.string()
@@ -29,10 +35,9 @@ export async function processEmail(data: Partial<SendEmailInput>): Promise<SendE
     return { success: false, message: "Invalid Request. All fields are required." };
   }
 
-  try {
-    schema.parse(data);
-  } catch (error: any) {
-    const errorMessage = error?.issues?.[0]?.message || error?.errors?.[0]?.message || "Validation error: Check parameters";
+  const parsed = schema.safeParse(data);
+  if (!parsed.success) {
+    const errorMessage = parsed.error?.issues?.[0]?.message || "Validation error: Check parameters";
     return { success: false, message: errorMessage };
   }
 
@@ -43,7 +48,7 @@ export async function processEmail(data: Partial<SendEmailInput>): Promise<SendE
   }
 
   try {
-    await resend.batch.send([
+    await getResend().batch.send([
       // Admin notification
       {
         from: "Portfolio Contact <no-reply@supunsathsara.com>",

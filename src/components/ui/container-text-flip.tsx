@@ -5,7 +5,7 @@ import { cn } from "@/utils/cn";
 
 export interface ContainerTextFlipProps {
     /** Array of words to cycle through in the animation */
-    words?: string[];
+    words: string[];
     /** Time in milliseconds between word transitions */
     interval?: number;
     /** Additional CSS classes to apply to the container */
@@ -26,12 +26,10 @@ export function ContainerTextFlip({
     const id = useId();
     const [currentWordIndex, setCurrentWordIndex] = useState(0);
     const [width, setWidth] = useState(100);
-    const textRef = React.useRef(null);
+    const textRef = React.useRef<HTMLSpanElement>(null);
 
     const updateWidthForWord = () => {
         if (textRef.current) {
-            // Add some padding to the text width (30px on each side)
-            // @ts-ignore
             const textWidth = textRef.current.scrollWidth + 30;
             setWidth(textWidth);
         }

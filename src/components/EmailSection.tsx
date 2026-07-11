@@ -2,7 +2,7 @@
 
 import { getCalApi } from "@calcom/embed-react";
 import { CalendarIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
-import { Turnstile } from "@marsidev/react-turnstile";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import GithubIcon from "@public/github-icon.svg";
 import InstaIcon from "@public/instagram-icon.svg";
 import LinkedinIcon from "@public/linkedin-icon.svg";
@@ -16,7 +16,7 @@ import { sendEmailAction } from "@/app/actions/sendEmail";
 const EmailSection = () => {
   const [status, setStatus] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
-  const captchaRef = useRef<any>(null);
+  const captchaRef = useRef<TurnstileInstance | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
   const [state, formAction, isPending] = useActionState(sendEmailAction, {

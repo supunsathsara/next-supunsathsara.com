@@ -19,8 +19,8 @@ const achievementsList = [
 ];
 
 
-function AnimatedNumber({ number, duration, threshold = 0 }) {
-  const numberRef = useRef(null);
+function AnimatedNumber({ number, duration, threshold = 0 }: Readonly<{ number: number; duration: number; threshold?: number }>) {
+  const numberRef = useRef<HTMLSpanElement>(null);
   const [currentNumber, setCurrentNumber] = useState(0);
   const [isIntersecting, setIsIntersecting] = useState(false);
 
