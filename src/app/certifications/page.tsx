@@ -4,7 +4,7 @@ import { useState, useCallback } from "react";
 import { AnimatePresence } from "motion/react";
 import { GradualSpacing } from "@/components/ui/GradualSpacing";
 import { CertificateCard, CertificateLightbox } from "@/components/CertificateItem";
-import type { Certificate } from "@/constants/certificates";
+import type { Certificate } from "@/types/certificate";
 import certificates from "@/constants/certificates";
 
 const sorted = [...certificates].sort((a, b) => b.id - a.id);

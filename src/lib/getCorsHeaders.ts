@@ -1,4 +1,4 @@
-type CorsHeaders = Record<string, string>;
+import type { CorsHeaders } from "@/types/api";
 
 const getCorsHeaders = (origin: string): CorsHeaders => {
   // Default options

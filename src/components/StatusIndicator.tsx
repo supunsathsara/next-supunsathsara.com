@@ -1,5 +1,6 @@
 import { clsx } from "clsx";
 import React from "react";
+import type { Monitor, UptimeRobotResponse } from "@/types/api";
 
 const StatusIndicator = async () => {
   let statusColor = "bg-green-500";
@@ -18,15 +19,15 @@ const StatusIndicator = async () => {
     });
 
     if (response.ok) {
-      const data = await response.json();
+      const data: UptimeRobotResponse = await response.json();
 
       if (data.stat === "ok") {
         const monitors = data.monitors;
         const upCount = monitors.filter(
-          (monitor) => monitor.status === 2
+          (monitor: Monitor) => monitor.status === 2
         ).length;
         const downCount = monitors.filter(
-          (monitor) => monitor.status === 9 || monitor.status === 8
+          (monitor: Monitor) => monitor.status === 9 || monitor.status === 8
         ).length;
 
         if (upCount === monitors.length) {

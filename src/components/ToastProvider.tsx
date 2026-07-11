@@ -1,9 +1,10 @@
 'use client';
 
+import React from "react";
 import { Toaster } from 'react-hot-toast';
 
 
-const ToastProvider = ({ children }) => {
+const ToastProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Toaster position='top-center' reverseOrder={false} />

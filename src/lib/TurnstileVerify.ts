@@ -1,9 +1,4 @@
-interface TurnstileResponse {
-  success: boolean;
-  "error-codes"?: string[];
-  challenge_ts?: string;
-  hostname?: string;
-}
+import type { TurnstileResponse } from "@/types/api";
 
 export default async function TurnstileVerify(token: string): Promise<TurnstileResponse> {
   const verifyEndpoint = "https://challenges.cloudflare.com/turnstile/v0/siteverify";

@@ -11,14 +11,7 @@ import {
   ChevronRightIcon,
 } from "@heroicons/react/24/outline";
 import { CheckBadgeIcon } from "@heroicons/react/24/solid";
-
-interface Certificate {
-  id: number;
-  name: string;
-  url: string;
-  provider: string;
-  image: string;
-}
+import type { Certificate } from "@/types/certificate";
 
 interface CertificateItemProps {
   certificate: Certificate;

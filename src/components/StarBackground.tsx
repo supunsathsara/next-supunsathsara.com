@@ -5,8 +5,8 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial, Preload } from "@react-three/drei";
 import * as random from "maath/random/dist/maath-random.esm";
 
-const StarBackground = (props) => {
-  const ref = useRef<any>(null);
+const StarBackground = (props: Record<string, unknown>) => {
+  const ref = useRef<React.ComponentRef<typeof Points>>(null);
   const [sphere] = useState(() =>
     random.inSphere(new Float32Array(6000), { radius: 1.2 })
   );
