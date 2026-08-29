@@ -103,7 +103,7 @@ const EmailSection = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image src={GithubIcon} alt="Github Icon" />
+            <Image src={GithubIcon} alt="GitHub profile of Supun Sathsara" />
           </Link>
           <Link
             href="https://www.linkedin.com/in/supunsathsara/"
@@ -111,7 +111,7 @@ const EmailSection = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image src={LinkedinIcon} alt="Linkedin Icon" />
+            <Image src={LinkedinIcon} alt="LinkedIn profile of Supun Sathsara" />
           </Link>
           <Link
             href="https://twitter.com/ssupunsathsara"
@@ -124,7 +124,7 @@ const EmailSection = () => {
               src={XIcon}
               height={48}
               width={48}
-              alt="X Icon"
+              alt="Supun Sathsara on X (Twitter)"
             />
           </Link>
           <Link
@@ -137,7 +137,7 @@ const EmailSection = () => {
               className="p-1"
               src={InstaIcon}
               height={48}
-              alt="Instagram Icon"
+              alt="Instagram profile of Supun Sathsara"
             />
           </Link>
         </div>

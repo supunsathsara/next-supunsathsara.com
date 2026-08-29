@@ -1,0 +1,162 @@
+{
+  "username": "supunsathsara",
+  "pinned": [
+    "NotifIBM/notifibm.com",
+    "Vento",
+    "SkyCast-ML",
+    "graha",
+    "BookNest",
+    "pizza-creed",
+    "SalesPro",
+    "KinderNest-App",
+    "iwb325-phoenix-code",
+    "Fish-Feeder",
+    "secure-chat",
+    "SurgeLink",
+    "WA-bot"
+  ],
+  "extra": [
+    "NotifIBM/notifibm.com"
+  ],
+  "hidden": [
+    "next-supunsathsara.com",
+    "old.supunsathsara.com",
+    "supunsathsara",
+    "supunsathsara.github.io",
+    "bio.supunsathsara.com",
+    "psl.supunsathsara.com",
+    "dotfiles",
+    "links",
+    "app.clz"
+  ],
+  "noisePatterns": [
+    "^(hello|dse\\d|test[-_]|workshop|.*-demo-temp|.*-examples|.*\\.old)",
+    "(-cw$|-test-repo$|^gpg-signature-test$)"
+  ],
+  "titleOverrides": {
+    "notifibm.com": "NotifIBM",
+    "iwb325-phoenix-code": "Eventure"
+  },
+  "cardOverrides": {
+    "notifibm.com": {
+      "description": "Watches the NIBM LMS around the clock and texts the whole batch the moment results are published.",
+      "topics": [
+        "automation",
+        "sms",
+        "scraping"
+      ]
+    },
+    "Vento": {
+      "topics": [
+        "event-ticketing",
+        "realtime",
+        "fullstack"
+      ],
+      "description": "Modern event ticketing platform with real-time updates and thread-safe ticket booking."
+    },
+    "SkyCast-ML": {
+      "description": "AI-powered weather predictions with a FastAPI brain and a React frontend, visualized with Recharts.",
+      "topics": [
+        "machine-learning",
+        "fastapi",
+        "weather"
+      ]
+    },
+    "graha": {
+      "description": "Vedic astrology engine on Swiss Ephemeris. Birth charts, Dasa timelines and matchmaking, verified against NASA JPL.",
+      "topics": [
+        "astrology",
+        "ephemeris",
+        "rule-engine"
+      ]
+    },
+    "BookNest": {
+      "description": "Library management system with an ASP.NET Core backend and a React frontend.",
+      "topics": [
+        "aspnet-core",
+        "react",
+        "dotnet"
+      ]
+    },
+    "SalesPro": {
+      "description": "Android application built with Kotlin to streamline day-to-day sales workflows.",
+      "topics": [
+        "android",
+        "kotlin",
+        "mobile"
+      ]
+    },
+    "KinderNest-App": {
+      "description": "Cross-platform kindergarten management app built with React Native.",
+      "topics": [
+        "react-native",
+        "mobile",
+        "education"
+      ]
+    },
+    "iwb325-phoenix-code": {
+      "description": "Event ticketing platform that took Team Phoenix Code to the Innovate with Ballerina top 10."
+    },
+    "Fish-Feeder": {
+      "topics": [
+        "iot",
+        "automation",
+        "hardware"
+      ]
+    },
+    "secure-chat": {
+      "description": "Real-time chat application built on the Next.js and Supabase stack.",
+      "topics": [
+        "nextjs",
+        "supabase",
+        "chat"
+      ]
+    },
+    "SurgeLink": {
+      "description": "Social network to connect, share moments and discover content, built with Next.js and Supabase.",
+      "topics": [
+        "nextjs",
+        "supabase",
+        "social-network"
+      ]
+    },
+    "WA-bot": {
+      "description": "Serverless WhatsApp AI assistant on the edge, with hybrid Groq and Hugging Face engines and a Telegram media bridge.",
+      "topics": [
+        "whatsapp",
+        "serverless",
+        "ai"
+      ]
+    }
+  },
+  "fallbackProjects": [
+    {
+      "fullName": "NotifIBM/notifibm.com",
+      "title": "NotifIBM",
+      "description": "Web application that offers NIBM students timely notifications and a user-friendly GPA calculator.",
+      "url": "https://notifibm.com",
+      "primaryLanguage": "JavaScript"
+    },
+    {
+      "fullName": "supunsathsara/Vento",
+      "title": "Vento",
+      "description": "A modern event ticketing platform built with React, Node.js and TypeScript.",
+      "url": "https://github.com/supunsathsara/Vento",
+      "primaryLanguage": "TypeScript"
+    },
+    {
+      "fullName": "supunsathsara/SkyCast-ML",
+      "title": "SkyCast ML",
+      "description": "AI-powered weather prediction application with machine learning models.",
+      "url": "https://github.com/supunsathsara/SkyCast-ML",
+      "primaryLanguage": "TypeScript"
+    },
+    {
+      "fullName": "supunsathsara/graha",
+      "title": "Graha",
+      "description": "Vedic Astrology Engine built with TypeScript.",
+      "url": "https://github.com/supunsathsara/graha",
+      "primaryLanguage": "TypeScript"
+    }
+  ]
+}

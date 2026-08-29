@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-label="Project preview unavailable">
+  <defs>
+    <radialGradient id="glow-purple" cx="20%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#2A0E61" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#030014" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-cyan" cx="85%" cy="75%" r="55%">
+      <stop offset="0%" stop-color="#0891b2" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#030014" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="text-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="600" fill="#030014"/>
+  <rect width="1200" height="600" fill="url(#glow-purple)"/>
+  <rect width="1200" height="600" fill="url(#glow-cyan)"/>
+
+  <g fill="#ffffff">
+    <circle cx="120" cy="90" r="1.5" opacity="0.5"/>
+    <circle cx="340" cy="50" r="1" opacity="0.35"/>
+    <circle cx="520" cy="140" r="1.5" opacity="0.4"/>
+    <circle cx="760" cy="70" r="1" opacity="0.45"/>
+    <circle cx="980" cy="120" r="1.5" opacity="0.3"/>
+    <circle cx="1100" cy="60" r="1" opacity="0.4"/>
+    <circle cx="200" cy="480" r="1.5" opacity="0.35"/>
+    <circle cx="430" cy="540" r="1" opacity="0.45"/>
+    <circle cx="700" cy="500" r="1.5" opacity="0.3"/>
+    <circle cx="900" cy="550" r="1" opacity="0.4"/>
+    <circle cx="1060" cy="470" r="1.5" opacity="0.35"/>
+    <circle cx="80" cy="300" r="1" opacity="0.3"/>
+    <circle cx="1140" cy="320" r="1" opacity="0.35"/>
+  </g>
+
+  <g transform="translate(600, 270)" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, monospace">
+    <g font-size="88" font-weight="bold" fill="url(#text-grad)">
+      <text x="-150" y="30">&lt;</text>
+      <text x="118" y="30">/&gt;</text>
+    </g>
+    <rect x="-96" y="8" width="192" height="10" rx="5" fill="url(#text-grad)" opacity="0.65"/>
+  </g>
+
+  <text x="600" y="420" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="26" fill="#ADB7BE">Live preview loading…</text>
+  <text x="600" y="470" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="18" fill="#4b5563">supunsathsara.com</text>
+</svg>

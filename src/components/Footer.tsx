@@ -3,9 +3,9 @@ import Logo from "@public/images/white Logo-typography.png";
 import Image from "next/image";
 import Link from "next/link";
 import StatusIndicator from "./StatusIndicator";
+import CurrentYear from "./CurrentYear";
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
   return (
     <footer className="footer border z-10 border-t-[#33353F] border-l-transparent border-r-transparent text-white">
       <div className="container p-12 flex flex-col gap-3 md:gap-0 md:flex-row justify-between my-auto mx-auto">
@@ -18,7 +18,7 @@ const Footer = () => {
         />
         <div className="my-auto mx-auto md:mx-0 text-center">
           <p className="text-slate-400">
-            All rights reserved &copy; 2023 - {currentYear}
+            All rights reserved &copy; 2023 - <CurrentYear />
           </p>
         </div>
         <div className="my-auto">
