@@ -65,7 +65,7 @@ const HeroSection = () => {
           <div className="rounded-full bg-[#03001417] w-[200px] h-[200px] sm:w-[250px] sm:h-[250px] lg:w-[350px] lg:h-[350px] xl:w-[400px] xl:h-[400px] relative shadow-xl shadow-[#2A0E61]/50 backdrop-blur-md">
             <Image
               src="/images/hero.jpg"
-              alt="hero image"
+              alt="Portrait of Supun Sathsara, software engineer and web developer"
               className="rounded-full absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
               loading="eager" // Load this critical image eagerly
               priority // Load this image before others below the fold

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import InsightsSection from "@/components/InsightsSection";
@@ -9,6 +10,9 @@ import GallerySection from "@/components/GallerySection";
 import HolopinBoard from "@/components/HolopinBoard";
 import YoutubePlayer from "@/components/YoutubePlayer";
 import CinematicIntro from "@/components/CinematicIntro";
+import { createPageMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createPageMetadata({ path: "/" });
 
 export default function Home() {
   return (

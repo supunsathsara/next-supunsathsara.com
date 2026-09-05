@@ -18,6 +18,9 @@ module.exports = {
         primary: colors.purple,
         secondary: colors.cyan,
       },
+      fontFamily: {
+        handwritten: ["var(--font-handwritten)"],
+      },
       animation: {
         shimmer: "shimmer 3s linear infinite",
       },

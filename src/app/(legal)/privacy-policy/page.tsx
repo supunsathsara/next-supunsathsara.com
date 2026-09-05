@@ -1,10 +1,18 @@
+import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 
+export const metadata: Metadata = createPageMetadata({
+  title: "Privacy Policy",
+  description:
+    "Privacy policy for supunsathsara.com, covering what personal information is collected and how it is used.",
+  path: "/privacy-policy",
+});
 
 export default function PrivacyPage() {
     return (
         <div className="container mx-auto mt-24 my-8 relative z-5 text-center flex flex-col md:flex-row md:flex-wrap pb-12 text-white">
             <div className="my-4 text-center mx-auto">
-                <h2 className="text-2xl sm:text-4xl text-white font-bold">Privacy Policy </h2>
+                <h1 className="text-2xl sm:text-4xl text-white font-bold">Privacy Policy </h1>
             </div>
             <div className="m-2 text-center mx-auto" >
                 <div

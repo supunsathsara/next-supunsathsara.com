@@ -26,9 +26,9 @@ export const InsightsSection = () => {
               className="lg:col-span-8"
             >
               <label className="text-xs uppercase tracking-[0.2em] text-[#b89fff] mb-6 block font-medium">Manifesto</label>
-              <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-12 text-transparent bg-clip-text bg-gradient-to-tr from-[#b89fff] to-[#00cffc]">
+              <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-12 text-transparent bg-clip-text bg-gradient-to-tr from-[#b89fff] to-[#00cffc]">
                 Engineering Philosophy
-              </h1>
+              </h2>
               <p className="text-xl md:text-2xl text-gray-400 leading-relaxed font-light">
                 In an era where digital noise is constant, I prioritize <span className="text-white font-normal">clean, scalable, and intuitive user experiences</span>. My approach integrates rigorous software engineering principles with a dedication to robust architecture. Whether building complex distributed systems or crafting highly responsive interfaces, the goal remains the same: <span className="text-[#00cffc] italic">invisible complexity, visible simplicity.</span>
               </p>

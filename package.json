@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
-    "build": "next build",
+    "build": "node scripts/fetch-project-images.mjs && next build",
     "start": "next start",
     "lint": "eslint ."
   },
@@ -26,6 +26,7 @@
     "react-animated-numbers": "^0.16.0",
     "react-dom": "19.2.4",
     "react-hot-toast": "^2.6.0",
+    "react-tweet": "^3.3.1",
     "react-type-animation": "^3.2.0",
     "react-youtube": "^10.1.0",
     "resend": "^6.10.0",

@@ -1,8 +1,18 @@
+import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "Terms & Conditions",
+  description:
+    "Terms and conditions for the use of supunsathsara.com, the personal portfolio website of Supun Sathsara.",
+  path: "/terms",
+});
+
 export default function TermsPage() {
   return (
     <div className="container mx-auto mt-24 my-8 relative z-5 text-center flex flex-col md:flex-row md:flex-wrap pb-12">
       <div className="my-4 text-center mx-auto">
-        <h2 className="text-2xl sm:text-4xl text-white font-bold">Terms & Conditions </h2>
+        <h1 className="text-2xl sm:text-4xl text-white font-bold">Terms & Conditions </h1>
       </div>
       <div className="m-2 mt-[8px] mx-5 font-normal sm:text-lg text-sm text-start text-white" >
         <p className="text-gray-200 mb-4">

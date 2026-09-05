@@ -13,8 +13,13 @@ const CinematicIntro = ({
 
   // Fire onComplete callback if intro was already shown
   useEffect(() => {
-    if (typeof globalThis !== "undefined" && sessionStorage.getItem("intro-shown")) {
-      setPhase("done");
+    if (typeof globalThis !== "undefined") {
+      const alreadyShown = sessionStorage.getItem("intro-shown");
+      const prefersReducedMotion =
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (alreadyShown || prefersReducedMotion) {
+        setPhase("done");
+      }
     }
   }, []);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -118,6 +123,16 @@ const CinematicIntro = ({
 
   // Skip on click/tap
   const handleSkip = useCallback(() => triggerExit(), [triggerExit]);
+
+  // Skip with ESC key
+  useEffect(() => {
+    if (phase === "done") return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") triggerExit();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [phase, triggerExit]);
 
   if (phase === "done") return null;
 
@@ -300,12 +315,12 @@ const CinematicIntro = ({
 
           {/* Skip hint */}
           <motion.p
-            className="absolute bottom-6 right-6 text-gray-600 text-xs tracking-widest uppercase pointer-events-none"
+            className="absolute bottom-6 right-6 text-gray-500 text-xs tracking-widest uppercase pointer-events-none"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.4 }}
-            transition={{ delay: 2.5, duration: 1 }}
+            animate={{ opacity: 0.7 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
           >
-            tap to skip
+            tap or press esc to skip
           </motion.p>
         </motion.button>
       )}
