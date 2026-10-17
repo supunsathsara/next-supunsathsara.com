@@ -7,11 +7,19 @@ import * as random from "maath/random/dist/maath-random.esm";
 
 const StarBackground = (props: Record<string, unknown>) => {
   const ref = useRef<React.ComponentRef<typeof Points>>(null);
+  // Read once at mount: this component is client-only, so there is no
+  // hydration mismatch to guard against.
+  const [reducedMotion] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
   const [sphere] = useState(() =>
     random.inSphere(new Float32Array(6000), { radius: 1.2 })
   );
 
   useFrame((state, delta) => {
+    if (reducedMotion) return;
     if (ref.current) {
       ref.current.rotation.x -= delta/10;
       ref.current.rotation.y -= delta/15;
@@ -42,7 +50,11 @@ const StarBackground = (props: Record<string, unknown>) => {
 
 const StarsCanvas = () => (
     <div className="w-full h-auto fixed inset-0 z-0">
-        <Canvas camera={{position: [0, 0, 1]}}>
+        <Canvas
+          camera={{position: [0, 0, 1]}}
+          dpr={[1, 1.5]}
+          frameloop="always"
+        >
         <Suspense fallback={null}>
             <StarBackground />
         </Suspense>

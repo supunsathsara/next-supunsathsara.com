@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeftIcon, ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
 import { PROJECT_STORIES } from "@/content/stories";
 import { resolveProjectImage } from "@/lib/github";
-import { createPageMetadata } from "@/lib/metadata";
+import { createPageMetadata, SITE_URL } from "@/lib/metadata";
 import TweetEmbed from "@/components/embeds/TweetEmbed";
 import LinkedInEmbed from "@/components/embeds/LinkedInEmbed";
 
@@ -23,10 +23,13 @@ export async function generateMetadata({ params }: StoryPageProps): Promise<Meta
   const { slug } = await params;
   const story = PROJECT_STORIES.find((s) => s.slug === slug);
   if (!story) return {};
+  const path = `/projects/${story.slug}`;
+  const banner = story.bannerImage ?? (story.repoFullName ? resolveProjectImage(story.repoFullName) : null);
   return createPageMetadata({
     title: `${story.title} · Project Story`,
     description: story.excerpt,
-    path: `/projects/${story.slug}`,
+    path,
+    images: banner ? [{ url: banner, width: 1200, height: 630, alt: `${story.title} project preview` }] : undefined,
   });
 }
 
@@ -36,9 +39,66 @@ const StoryPage = async ({ params }: StoryPageProps) => {
   if (!story) notFound();
 
   const banner = story.bannerImage ?? (story.repoFullName ? resolveProjectImage(story.repoFullName) : null);
+  const canonical = `${SITE_URL}/projects/${story.slug}`;
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CreativeWork",
+        "@id": `${canonical}#work`,
+        name: story.title,
+        headline: story.tagline,
+        description: story.excerpt,
+        url: canonical,
+        image: banner ?? undefined,
+        dateCreated: story.year ?? undefined,
+        genre: "Software Project",
+        creator: {
+          "@type": "Person",
+          name: "Savindu Supun Sathsara",
+          url: SITE_URL,
+        },
+        keywords: story.techStack?.join(", "),
+        codeRepository: story.repoFullName
+          ? `https://github.com/${story.repoFullName}`
+          : undefined,
+        programmingLanguage: story.techStack,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: SITE_URL,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Projects",
+            item: `${SITE_URL}/#projects`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: story.title,
+            item: canonical,
+          },
+        ],
+      },
+    ],
+  };
 
   return (
     <article className="container mx-auto mt-24 max-w-4xl px-4 pb-24 md:px-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData),
+        }}
+      />
       <Link
         href="/#projects"
         className="mb-8 inline-flex items-center gap-2 text-sm text-[#ADB7BE] transition-colors hover:text-white"

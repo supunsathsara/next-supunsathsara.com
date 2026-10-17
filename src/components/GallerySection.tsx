@@ -20,7 +20,6 @@ const GallerySection = () => {
             placeholder="blur"
             fill
             sizes="(max-width: 768px) 213px, (max-width: 1024px) 25vw, 20vw"
-            priority
             className="rounded-lg object-cover"
           />
         </div>
@@ -32,7 +31,6 @@ const GallerySection = () => {
             placeholder="blur"
             fill
             sizes="(max-width: 768px) 213px, (max-width: 1024px) 25vw, 20vw"
-            priority
             className="rounded-lg object-cover object-[-16px] sm:object-center"
           />
         </div>
@@ -44,7 +42,6 @@ const GallerySection = () => {
             placeholder="blur"
             fill
             sizes="(max-width: 768px) 213px, (max-width: 1024px) 25vw, 20vw"
-            priority
             className="rounded-lg object-cover object-top sm:object-center"
           />
         </div>
@@ -56,7 +53,6 @@ const GallerySection = () => {
             placeholder="blur"
             fill
             sizes="(max-width: 768px) 213px, (max-width: 1024px) 25vw, 20vw"
-            priority
             className="rounded-lg object-cover"
           />
         </div>
@@ -68,7 +64,6 @@ const GallerySection = () => {
             placeholder="blur"
             fill
             sizes="(max-width: 768px) 213px, (max-width: 1024px) 25vw, 20vw"
-            priority
             className="rounded-lg object-cover"
           />
         </div>
@@ -80,7 +75,6 @@ const GallerySection = () => {
             placeholder="blur"
             fill
             sizes="(max-width: 768px) 213px, (max-width: 1024px) 25vw, 20vw"
-            priority
             className="rounded-lg object-cover"
           />
         </div>
@@ -92,7 +86,6 @@ const GallerySection = () => {
             placeholder="blur"
             fill
             sizes="(max-width: 768px) 213px, (max-width: 1024px) 25vw, 20vw"
-            priority
             className="rounded-lg object-cover"
           />
         </div>
@@ -104,7 +97,6 @@ const GallerySection = () => {
             placeholder="blur"
             fill
             sizes="(max-width: 768px) 213px, (max-width: 1024px) 25vw, 20vw"
-            priority
             className="rounded-lg object-cover"
           />
         </div>

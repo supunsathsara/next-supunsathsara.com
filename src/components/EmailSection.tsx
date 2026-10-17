@@ -48,17 +48,17 @@ const EmailSection = () => {
     }
   }, [state]);
 
-  useEffect(() => {
-    (async function () {
-      const cal = await getCalApi({ namespace: "quick-chat" });
-      cal("ui", {
-        theme: "dark",
-        styles: { branding: { brandColor: "#030014" } },
-        hideEventTypeDetails: false,
-        layout: "month_view",
-      });
-    })();
-  }, []);
+  // Cal.com pulls in a third-party script, so it is only initialised when the
+  // user actually asks to book rather than on every page load.
+  const handleScheduleClick = async () => {
+    const cal = await getCalApi({ namespace: "quick-chat" });
+    cal("ui", {
+      theme: "dark",
+      styles: { branding: { brandColor: "#030014" } },
+      hideEventTypeDetails: false,
+      layout: "month_view",
+    });
+  };
 
   return (
     <section
@@ -87,6 +87,8 @@ const EmailSection = () => {
           </a>
         </p>
         <button
+          type="button"
+          onClick={handleScheduleClick}
           data-cal-namespace="quick-chat"
           data-cal-link="supunsathsara/quick-chat"
           data-cal-config='{"layout":"month_view"}'
