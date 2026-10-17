@@ -17,6 +17,8 @@ interface PageMetadataInput {
   title?: string;
   description?: string;
   path: string;
+  /** Per-page OG/Twitter image, e.g. a project's own OG card. */
+  images?: NonNullable<Metadata["openGraph"]>["images"];
 }
 
 /** Builds per-page metadata with canonical, Open Graph and Twitter overrides. */
@@ -24,8 +26,10 @@ export function createPageMetadata({
   title,
   description = DEFAULT_DESCRIPTION,
   path,
+  images,
 }: PageMetadataInput): Metadata {
   const resolvedTitle = title ?? DEFAULT_TITLE;
+  const resolvedImages = images ?? [SOCIAL_CARD];
   return {
     // Only set when provided, otherwise the layout's title.default applies
     ...(title ? { title } : {}),
@@ -35,11 +39,13 @@ export function createPageMetadata({
       title: resolvedTitle,
       description,
       url: path,
-      images: [SOCIAL_CARD],
+      images: resolvedImages,
     },
     twitter: {
+      card: "summary_large_image",
       title: resolvedTitle,
       description,
+      images: resolvedImages,
     },
   };
 }

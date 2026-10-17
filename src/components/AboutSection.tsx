@@ -232,6 +232,38 @@ const AboutSection = () => {
     [startTransition]
   );
 
+  // WAI-ARIA arrow key navigation between tabs, with focus following selection.
+  const handleTabKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLDivElement>) => {
+      const direction =
+        {
+          ArrowRight: 1,
+          ArrowDown: 1,
+          ArrowLeft: -1,
+          ArrowUp: -1,
+        }[event.key as "ArrowRight" | "ArrowDown" | "ArrowLeft" | "ArrowUp"] ?? 0;
+
+      if (direction !== 0) {
+        event.preventDefault();
+        const currentIndex = TAB_CONFIG.findIndex((t) => t.id === tab);
+        const nextIndex =
+          (currentIndex + direction + TAB_CONFIG.length) % TAB_CONFIG.length;
+        const nextTab = TAB_CONFIG[nextIndex].id;
+        handleTabChange(nextTab);
+        document.getElementById(`tab-${nextTab}`)?.focus();
+        return;
+      }
+
+      if (event.key === "Home" || event.key === "End") {
+        event.preventDefault();
+        const nextTab = TAB_CONFIG[event.key === "Home" ? 0 : TAB_CONFIG.length - 1].id;
+        handleTabChange(nextTab);
+        document.getElementById(`tab-${nextTab}`)?.focus();
+      }
+    },
+    [tab, handleTabChange]
+  );
+
   const activeTabContent = useMemo(() => {
     const activeTab = TAB_CONFIG.find((t) => t.id === tab);
     const Component = activeTab?.component;
@@ -336,12 +368,18 @@ const AboutSection = () => {
               My focus is engineering platforms that are <strong>secure-by-design</strong>, <strong>type-safe</strong>, and fundamentally optimized for web performance.
             </p>
           </div>
-          <div className="flex flex-row justify-start mt-8 gap-2">
+          <div
+            role="tablist"
+            aria-label="About me"
+            className="flex flex-row justify-start mt-8 gap-2"
+            onKeyDown={handleTabKeyDown}
+          >
             {TAB_CONFIG.map(({ id, title }) => (
               <TabButton
                 key={id}
                 selectTab={() => handleTabChange(id)}
                 active={tab === id}
+                panelId={id}
               >
                 {title}
               </TabButton>
@@ -349,8 +387,10 @@ const AboutSection = () => {
           </div>
           <div
             className="mt-4 min-h-[300px] relative"
+            id={tab}
             role="tabpanel"
-            aria-label={`${tab} content`}
+            aria-labelledby={`tab-${tab}`}
+            tabIndex={0}
           >
             <AnimatePresence mode="wait">
               <motion.div

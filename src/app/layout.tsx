@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from "next";
 import { Caveat } from "next/font/google";
 import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
-import StarsCanvas from '@/components/StarBackground'
+import StarsCanvas from '@/components/StarBackgroundLazy'
 import ToastProvider from '@/components/ToastProvider'
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -120,6 +120,26 @@ const personSchema = {
   "name": "Savindu Supun Sathsara",
   "url": SITE_URL,
   "jobTitle": "Software Engineer",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Expernetic",
+  },
+  "hasOccupation": {
+    "@type": "Occupation",
+    "name": "Software Engineer",
+    "occupationLocation": {
+      "@type": "Country",
+      "name": "Sri Lanka",
+    },
+    "skills": [
+      "Next.js",
+      "React",
+      "Node.js",
+      "Python",
+      "TypeScript",
+      "System Architecture",
+    ],
+  },
   "description":
     "Top Software Engineer and Web Developer in Sri Lanka. Specializes in Next.js, React, Node.js, and Python.",
   "nationality": {
@@ -130,6 +150,8 @@ const personSchema = {
     "@type": "CollegeOrUniversity",
     "name": "National Institute of Business Management",
   },
+  "award": "NIBM Gold Medal for Software Engineering",
+  "knowsLanguage": ["en", "si"],
   "knowsAbout": [
     "Software Engineering",
     "Web Development",
@@ -146,6 +168,9 @@ const personSchema = {
   "sameAs": [
     "https://github.com/supunsathsara",
     "https://www.linkedin.com/in/supunsathsara/",
+    "https://x.com/ssupunsathsara",
+    "https://www.instagram.com/s_supun_sathsara/",
+    "https://supunsathsara.com",
   ],
 };
 
