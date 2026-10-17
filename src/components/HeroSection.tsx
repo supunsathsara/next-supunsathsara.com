@@ -23,7 +23,7 @@ const HeroSection = () => {
             <span className="block text-base sm:text-lg md:text-xl lg:text-2xl xl:text-4xl text-gray-300 mt-2">
               <ContainerTextFlip
                 words={[
-                  "Associate Software Engineer",
+                  "Software Engineer",
                   "Full-Stack Web Developer",
                   "Postman Student Leader",
                   "Tech Enthusiast & Innovator",
