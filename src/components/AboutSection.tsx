@@ -48,7 +48,6 @@ const EducationList = () => (
       <div className="flex justify-between">
         <span>Higher National Diploma in Software Engineering</span>
       </div>
-      <div className="text-sm text-gray-400">(Reading)</div>
       <div className="text-sm text-gray-400">
         National Institute of Business Management
       </div>
@@ -313,12 +312,12 @@ const AboutSection = () => {
                   🎂
                 </span>
               )}{" "}
-              <strong>Software Engineering</strong> undergraduate at <strong>NIBM Sri Lanka</strong>.
+              <strong>software engineer</strong> who turns complex problems into clean, working systems.
             </p>
             <p>
-              Currently, I build highly scalable web infrastructure as an{" "}
+              Currently, I build highly scalable web infrastructure as a{" "}
               <span className="font-bold hover:bg-primary-500 bg-white text-[#030014] rounded-xs px-1 transition-colors">
-                Associate Software Engineer
+                Software Engineer
               </span>{" "}
               at <strong>Expernetic</strong>, developing full-stack applications and enterprise microservices.
             </p>
