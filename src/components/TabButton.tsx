@@ -10,13 +10,29 @@ interface TabButtonProps {
   active: boolean;
   selectTab: () => void;
   children: React.ReactNode;
+  /** Connects the tab to its tabpanel via aria-controls. */
+  panelId: string;
 }
 
-const TabButton = ({ active, selectTab, children }: TabButtonProps) => {
+const TabButton = ({
+  active,
+  selectTab,
+  children,
+  panelId,
+}: TabButtonProps) => {
   const buttonClasses = active ? "text-white" : "text-[#ADB7BE]";
 
   return (
-    <button onClick={selectTab}>
+    <button
+      type="button"
+      role="tab"
+      id={`tab-${panelId}`}
+      aria-selected={active}
+      aria-controls={panelId}
+      // Roving tabindex: only the selected tab is in the tab order, arrows move between them.
+      tabIndex={active ? 0 : -1}
+      onClick={selectTab}
+    >
       <p className={`mr-3 font-semibold hover:text-white ${buttonClasses}`}>
         {children}
       </p>
